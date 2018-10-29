@@ -47,10 +47,14 @@ public class ConfigurationPageController {
             if (msfCoreService.isConfigured()) {
                 // reload msfIDgenerator installation
                 msfCoreService.msfIdentifierGeneratorInstallation();
-                // reload dhis2 metadata
-                dhisService.installDHIS2Metadata();
-                // overwriteSync2 configurations
-                msfCoreService.overwriteSync2Configuration();
+                try {
+                    // reload dhis2 metadata
+                    dhisService.installDHIS2Metadata();
+                    // overwriteSync2 configurations
+                    msfCoreService.overwriteSync2Configuration();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 response.sendRedirect(ui.pageLink("referenceapplication", "home"));
             }
         }

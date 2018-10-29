@@ -33,6 +33,17 @@
 
 	<dependencyManagement>
 		<dependencies>
+		
+			<!-- we explicitly use version 3.2.10 since 3.2.11 has a bug which was giving us issues,
+	         can probably remove this after next sass release -->
+	        <dependency>
+	            <groupId>rubygems</groupId>
+	            <artifactId>sass</artifactId>
+	            <version>3.2.10</version>
+	            <type>gem</type>
+                <scope>provided</scope>
+	        </dependency>
+	        
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
@@ -121,5 +132,6 @@
 		<htmlformentryVersion>3.7.0</htmlformentryVersion>
         <appointmentschedulingVersion>1.9.0</appointmentschedulingVersion>
         <lombokVersion>1.18.0</lombokVersion>
+        <uicommonsVersion>2.3.0</uicommonsVersion>
 	</properties>
 </project>

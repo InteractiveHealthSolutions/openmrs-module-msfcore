@@ -8,11 +8,8 @@ import org.openmrs.ui.framework.page.PageModel;
 
 /**
  * This controller initializes all the MSF custom dropdowns, and also initializes the existing
- * patient fields for editing.
- * 
- * Provenance is the first MSF custom registration field in the register patient page, that's why
- * this is done here.
- *
+ * patient fields for editing. Provenance is the first MSF custom registration field in the register
+ * patient page, that's why this is done here.
  */
 public class ProvenanceFragmentController {
 

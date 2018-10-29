@@ -13,6 +13,7 @@ import org.openmrs.PersonAttribute;
 import org.openmrs.api.context.Context;
 
 public class RegistrationAppUiUtils {
+
     /**
      * Gets the person attribute value for the specified patient for the
      * getPersonAttributeTypeByUuid that matches the specified uuid
@@ -60,7 +61,6 @@ public class RegistrationAppUiUtils {
             return null;
         }
     }
-
     public Date getDateOfArrival(Patient patient) {
         String date = getAttribute(patient, MSFCoreConfig.PERSON_ATTRIBUTE_DATE_OF_ARRIVAL_UUID);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-M-dd");
