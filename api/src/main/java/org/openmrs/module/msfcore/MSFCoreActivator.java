@@ -45,8 +45,13 @@ public class MSFCoreActivator extends BaseModuleActivator {
     public void started() {
         log.info("Started MSF Core Module");
 
-        Context.getService(DHISService.class).transferDHISMappingsToDataDirectory();
-        Context.getService(DHISService.class).installDHIS2Metadata();
+        try {
+            Context.getService(DHISService.class).transferDHISMappingsToDataDirectory();
+            Context.getService(DHISService.class).installDHIS2Metadata();
+        } catch (Exception e) {
+            log.info("Error thrown when configuring Dhis2 metadata: " + e.getMessage());
+        }
+
         Context.getService(MSFCoreService.class).overwriteSync2Configuration();
 
         triggerMSFApps(true);
