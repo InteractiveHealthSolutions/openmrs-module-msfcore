@@ -22,11 +22,6 @@ import org.openmrs.module.msfcore.api.util.DateUtils;
 import org.openmrs.module.msfcore.formaction.handler.FormAction;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
 @Component
 public class RequestApointmentFormAction implements FormAction {
 
