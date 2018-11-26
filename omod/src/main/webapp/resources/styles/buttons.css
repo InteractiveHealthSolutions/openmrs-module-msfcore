@@ -5,7 +5,7 @@ button.big {
 }
 .button.app.big {
     padding: 24px;
-    height: 96%;
+    height: 96px;
     color: #424C55;
 }
 
@@ -349,6 +349,27 @@ button.confirm.big i.icon-arrow-right {
 button.cancel.big i.icon-arrow-left {float: left;}
 button.confirm.big i.icon-arrow-right {float: right;}
 
+/* Exit from Inpatient Care */
+input.submitButton.confirm.right {
+    align-self: flex-end;
+}
+
+htmlform[formname="Discharge (Simple)"] button.cancel,
+htmlform[formname="Admission (Simple)"] button.cancel {
+    align-self: flex-start;
+    margin-top: -48px;
+}
+
+/* Audit Logs */ 
+
+h2[onclick="toggleFiltersDisplay()"] {
+    background-color: #fff !important; 
+    cursor: pointer;
+    border-radius: 4px; 
+    box-shadow: rgba(0,0,0,0.1) 0 2px 4px;
+    padding: 4px 8px;
+}
+
 /* Visit Note */
 
 #display-encounter-diagnoses-container li i {
@@ -375,7 +396,6 @@ button.confirm.big i.icon-arrow-right {float: right;}
 }
 
 /* BUTTONS > Transitions */
-*,
 *:hover,
 a,
 a:hover,
