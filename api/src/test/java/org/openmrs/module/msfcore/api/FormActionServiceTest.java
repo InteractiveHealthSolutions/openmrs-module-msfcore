@@ -40,31 +40,31 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
 
     @Test
     public void saveTestOrders_shouldCreateTestOrdersForNewObservationOrders() {
-        executeDataSet("MSFCoreService.xml");
+        executeDataSet("FormActionService.xml");
         Encounter encounter = Context.getEncounterService().getEncounter(29);
 
-        List<Order> existingOrders = encounter.getOrdersWithoutOrderGroups();
+        List<Order> existingOrders = encounter.getOrders().stream().filter(o -> !o.getVoided()).collect(Collectors.toList());
         assertThat(existingOrders.size(), is(1));
-        assertThat(existingOrders.iterator().next().getConcept().getId(), is(5000010));
+        assertThat(existingOrders.get(0).getConcept().getId(), is(5000010));
 
         // execute test
         formActionService.saveTestOrders(encounter);
 
-        List<Order> updatedOrders = encounter.getOrdersWithoutOrderGroups();
+        List<Order> updatedOrders = encounter.getOrders().stream().collect(Collectors.toList());
 
         assertThat(updatedOrders.size(), is(2));
-        assertThat(updatedOrders.get(0).getConcept().getId(), is(5000010));
-        assertThat(updatedOrders.get(1).getConcept().getId(), is(5000011));
-    }
+        assertThat(updatedOrders.stream().filter(o -> o.getConcept().getId().equals(5000010)).findAny().isPresent(), is(true));
+        assertThat(updatedOrders.stream().filter(o -> o.getConcept().getId().equals(5000011)).findAny().isPresent(), is(true));
 
+    }
     @Test
     public void saveTestOrders_shouldNotSaveOrderIfConceptIsNotLabSetMember() {
-        executeDataSet("MSFCoreService.xml");
+        executeDataSet("FormActionService.xml");
         Encounter encounter = Context.getEncounterService().getEncounter(29);
 
-        List<Order> existingOrders = encounter.getOrdersWithoutOrderGroups();
+        List<Order> existingOrders = encounter.getOrders().stream().collect(Collectors.toList());
         assertThat(existingOrders.size(), is(1));
-        assertThat(existingOrders.iterator().next().getConcept().getId(), is(5000010));
+        assertThat(existingOrders.get(0).getConcept().getId(), is(5000010));
 
         // update obs concept to be not lab set member
         Obs notLabSetMemberObs = obsService.getObs(2);
@@ -74,7 +74,7 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
         // execute test
         formActionService.saveTestOrders(encounter);
 
-        List<Order> updatedOrders = encounter.getOrdersWithoutOrderGroups();
+        List<Order> updatedOrders = encounter.getOrders().stream().collect(Collectors.toList());
 
         assertThat(updatedOrders.size(), is(1));
         assertThat(updatedOrders.get(0).getConcept().getId(), is(5000010));
@@ -82,18 +82,18 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
 
     @Test
     public void saveTestOrders_shouldVoidOrderIfObsIsVoided() throws Exception {
-        executeDataSet("MSFCoreService.xml");
-        Encounter encounterService = Context.getEncounterService().getEncounter(30);
+        executeDataSet("FormActionService.xml");
+        Encounter encounter = Context.getEncounterService().getEncounter(30);
 
-        List<Order> existingOrders = encounterService.getOrdersWithoutOrderGroups();
+        List<Order> existingOrders = encounter.getOrders().stream().collect(Collectors.toList());
         assertThat(existingOrders.size(), is(1));
-        assertThat(existingOrders.iterator().next().getConcept().getId(), is(5000012));
+        assertThat(existingOrders.get(0).getConcept().getId(), is(5000012));
         assertThat(existingOrders.get(0).getVoided(), is(false));
 
         // execute test
-        formActionService.saveTestOrders(encounterService);
+        formActionService.saveTestOrders(encounter);
 
-        List<Order> updatedOrders = encounterService.getOrdersWithoutOrderGroups();
+        List<Order> updatedOrders = encounter.getOrders().stream().collect(Collectors.toList());
 
         assertThat(updatedOrders.size(), is(1));
         assertThat(updatedOrders.get(0).getConcept().getId(), is(5000012));
@@ -102,22 +102,10 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
 
     @Test
     public void saveTestOrders_shouldNotVoidOrderIfOrderIsFulfilled() {
-        executeDataSet("MSFCoreService.xml");
-        Encounter encounterService = Context.getEncounterService().getEncounter(31);
-
-        List<Order> existingOrders = encounterService.getOrdersWithoutOrderGroups();
-        assertThat(existingOrders.size(), is(1));
-        assertThat(existingOrders.iterator().next().getConcept().getId(), is(5000012));
-        assertThat(existingOrders.get(0).getVoided(), is(false));
-
-        // execute test
-        formActionService.saveTestOrders(encounterService);
-
-        List<Order> updatedOrders = encounterService.getOrdersWithoutOrderGroups();
-
-        assertThat(updatedOrders.size(), is(1));
-        assertThat(updatedOrders.get(0).getConcept().getId(), is(5000012));
-        assertThat(updatedOrders.get(0).getVoided(), is(false));
+        executeDataSet("FormActionService.xml");
+        Encounter encounter = Context.getEncounterService().getEncounter(31);
+        formActionService.saveTestOrders(encounter);
+        Assert.assertFalse(Context.getOrderService().getOrder(3).getVoided());
     }
 
     @Test
