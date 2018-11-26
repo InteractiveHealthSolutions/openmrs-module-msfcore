@@ -545,4 +545,11 @@ public class MSFCoreConfig {
     public static final String PERSON_ATTRIBUTE_FATHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd7";
 
     public static final String REFERRAL_ORDER_TYPE_UUID = "1bb0842a-ed99-11e8-8eb2-f2801f1b9fd1";
+
+    public static final String CONCEPT_UUID_FEEDBACK = "5000042AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String CONCEPT_UUID_FEEDBACK_FROM = "5000043AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String ENCOUNTER_TYPE_REFER_PATIENT_UUID = "0aa6553b-be5z-444a-93fr-23962bc594e1";
+
 }

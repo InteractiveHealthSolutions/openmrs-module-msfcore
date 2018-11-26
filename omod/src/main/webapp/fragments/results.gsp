@@ -22,7 +22,8 @@
 			<tbody>
 				<tr>
 					<td ng-if="results.filters.name">{{results.filters.name}} ${ui.message('general.search')}</td>
-					<td ng-if="results.filters.statuses">${ui.message('msfcore.filter')}</td>
+					<td ng-if="results.filters.statuses">${ui.message('msfcore.statusFilter')}</td>
+					<td ng-if="results.filters.providers">${ui.message('msfcore.providerFilter')}</td>
 					<td ng-if="results.filters.dates">${ui.message('msfcore.dateFilter')}</td>
 				</tr>
 				<tr>
@@ -32,8 +33,14 @@
 					<td ng-if="results.filters.statuses" class="no-wrap">
 						<select ng-model="filterStatusValue" id="filter-status" ng-change="statusFilter()">
 							<option value="all" ng-if="results.resultCategory == 'LAB_RESULTS'">${ui.message('msfcore.statusAll')}</option>
-							<option value="all" ng-if="results.resultCategory == 'DRUG_LIST'">${ui.message('msfcore.statusAll')}</option>
+							<option value="all" ng-if="results.resultCategory == 'DRUG_LIST' || results.resultCategory == 'REFERRAL_LIST'">${ui.message('msfcore.statusAll')}</option>
 							<option ng-repeat="status in results.filters.statuses" value="{{status}}">{{status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();}}</option>
+						</select>
+					</td>
+					<td ng-if="results.filters.providers" class="no-wrap">
+						<select ng-model="filterProviderValue" id="filter-provider" ng-change="providerFilter()">
+							<option value="all">${ui.message('msfcore.providerAll')}</option>
+							<option ng-repeat="provider in results.filters.providers" value="{{provider.name}}">{{provider.name}}</option>
 						</select>
 					</td>
 					<td ng-if="results.filters.dates" class="no-wrap">

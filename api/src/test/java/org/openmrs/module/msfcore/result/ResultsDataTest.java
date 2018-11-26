@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.Obs;
 import org.openmrs.Order;
@@ -381,5 +382,111 @@ public class ResultsDataTest extends BaseModuleContextSensitiveTest {
                         .build();
         resultsData.addRetrievedResults();
         assertEquals(6, resultsData.getResults().size());
+    }
+
+    private void executeReferralsDataSets() {
+        executeDataSet("ResultsData.xml");
+        // TODO can you imagine OrderTypes in ResultsData as well as orders
+        // fails referencing types,
+        // seems its all persisted after executeDataSet
+        executeDataSet("Referrals.xml");
+    }
+
+    @Test
+    public void addRetriedResults_shouldAddReferralsOrders() throws ParseException {
+        executeReferralsDataSets();
+
+        assertEquals(MSFCoreConfig.REFERRAL_ORDER_TYPE_UUID, Context.getOrderService().getOrderType(18).getUuid());
+
+        // should retrieve and add lab test orders with matching results
+        ResultsData resultsData = ResultsData.builder().resultCategory(ResultCategory.REFERRAL_LIST).patient(
+                        Context.getPatientService().getPatient(7)).build();
+        resultsData.addRetrievedResults();
+
+        assertEquals(Arrays.asList(Context.getMessageSourceService().getMessage("msfcore.location"), Context.getMessageSourceService()
+                        .getMessage("msfcore.date"), Context.getMessageSourceService().getMessage("msfcore.reason"), Context
+                        .getMessageSourceService().getMessage("msfcore.provider"), Context.getMessageSourceService().getMessage(
+                        "msfcore.feedback"), Context.getMessageSourceService().getMessage("msfcore.feedbackFrom")), resultsData.getKeys());
+
+        assertEquals(3, resultsData.getResults().size());
+
+        assertEquals(ResultColumn.builder().value("44rrc453-fc20-4f1b-a351-7eff54b4dag0").build(), resultsData.getResults().get(0).get(
+                        "uuid"));
+        assertEquals(ResultColumn.builder().value(ResultStatus.CANCELLED).build(), resultsData.getResults().get(0).get("status"));
+        assertEquals(ResultColumn.builder().value(Arrays.asList()).build(), resultsData.getResults().get(0).get("actions"));
+        assertEquals(ResultColumn.builder().value("Surgery").build(), resultsData.getResults().get(0).get(
+                        Context.getMessageSourceService().getMessage("msfcore.location")));
+
+        assertEquals(ResultColumn.builder().value("44rrc453-fc20-4f1b-a351-7eff54b4daf9").build(), resultsData.getResults().get(1).get(
+                        "uuid"));
+        assertEquals(ResultColumn.builder().value(ResultStatus.PENDING).build(), resultsData.getResults().get(1).get("status"));
+        assertEquals(ResultColumn.builder().value(Arrays.asList(ResultAction.EDIT, ResultAction.DELETE)).build(), resultsData.getResults()
+                        .get(1).get("actions"));
+        assertEquals(ResultColumn.builder().value("Cardiologist").build(), resultsData.getResults().get(1).get(
+                        Context.getMessageSourceService().getMessage("msfcore.location")));
+
+        assertEquals(ResultColumn.builder().value("44rrc453-fc20-4f1b-a351-7eff54b4daf8").build(), resultsData.getResults().get(2).get(
+                        "uuid"));
+        assertEquals(ResultColumn.builder().value(ResultStatus.COMPLETED).build(), resultsData.getResults().get(2).get("status"));
+        assertEquals(ResultColumn.builder().value(Arrays.asList(ResultAction.EDIT)).build(), resultsData.getResults().get(2).get("actions"));
+        assertEquals(ResultColumn.builder().value("Emergency").build(), resultsData.getResults().get(2).get(
+                        Context.getMessageSourceService().getMessage("msfcore.location")));
+        assertEquals(ResultColumn.builder().editable(true).value("needs emergency care else the heart fails soon").build(), resultsData
+                        .getResults().get(2).get(Context.getMessageSourceService().getMessage("msfcore.feedback")));
+        CodedOption prov = CodedOption.builder().name("Super User").uuid("c2299800-cca9-11e0-9572-0800200c9a66").build();
+        assertEquals(
+                        ResultColumn.builder().editable(true).type(Type.CODED).value(prov.getName()).codedOptions(Arrays.asList(prov))
+                                        .build(), resultsData.getResults().get(2).get(
+                                        Context.getMessageSourceService().getMessage("msfcore.feedbackFrom")));
+
+        // should retreive filters
+        assertEquals(ResultFilters.builder().name(Context.getMessageSourceService().getMessage("msfcore.location")).statuses(
+                        Arrays.asList(ResultStatus.CANCELLED, ResultStatus.PENDING, ResultStatus.COMPLETED)).providers(Arrays.asList(prov))
+                        .build(), resultsData.getFilters());
+
+        // should retrive default pagination with number of found results set
+        assertEquals(Pagination.builder().totalItemsNumber(3).build(), resultsData.getPagination());
+
+        // should retrieve right dateFormatPattern
+        assertEquals(Context.getDateFormat().toPattern(), resultsData.getDateFormatPattern());
+    }
+
+    @Test
+    public void updateReferralOrderRow_shouldAddNewReferralValues() {
+        executeReferralsDataSets();
+
+        LinkedHashMap<String, Object> mapWithPayload = new LinkedHashMap<String, Object>();
+        mapWithPayload.put("category", "referralList");
+        List<LinkedHashMap<String, Object>> payload = new ArrayList<LinkedHashMap<String, Object>>();
+        LinkedHashMap<String, Object> payloadfeedback = new LinkedHashMap<String, Object>();
+        payloadfeedback.put("uuid_key_type_concept", "44rrc453-fc20-4f1b-a351-7eff54b4daf9_4_STRING_");
+        payloadfeedback.put("value", "meet with Cardiologist for a heart functionality test");
+        payload.add(payloadfeedback);
+        LinkedHashMap<String, Object> payloadfeedbackFrom = new LinkedHashMap<String, Object>();
+        payloadfeedbackFrom.put("uuid_key_type_concept", "44rrc453-fc20-4f1b-a351-7eff54b4daf9_5_STRING_");
+        payloadfeedbackFrom.put("value", "c2299800-cca9-11e0-9572-0800200c9a66");
+        payload.add(payloadfeedbackFrom);
+        mapWithPayload.put("payload", payload);
+        List<Obs> created = (List<Obs>) ResultsData.updateResultRow(mapWithPayload);
+        Assert.assertEquals(2, created.size());
+        Assert.assertEquals("meet with Cardiologist for a heart functionality test", created.get(0).getValueText());
+        Assert.assertEquals("c2299800-cca9-11e0-9572-0800200c9a66", created.get(1).getValueText());
+    }
+
+    @Ignore
+    public void updateReferralOrderRow_shouldUpdateExistingReferralValues() {
+        executeReferralsDataSets();
+
+        LinkedHashMap<String, Object> mapWithPayload = new LinkedHashMap<String, Object>();
+        mapWithPayload.put("category", "referralList");
+        List<LinkedHashMap<String, Object>> payload = new ArrayList<LinkedHashMap<String, Object>>();
+        LinkedHashMap<String, Object> payloadfeedback = new LinkedHashMap<String, Object>();
+        payloadfeedback.put("uuid_key_type_concept", "44rrc453-fc20-4f1b-a351-7eff54b4daf8_4_STRING_");
+        payloadfeedback.put("value", "emergency referall");
+        payload.add(payloadfeedback);
+        mapWithPayload.put("payload", payload);
+        List<Obs> created = (List<Obs>) ResultsData.updateResultRow(mapWithPayload);
+        Assert.assertEquals(1, created.size());
+        Assert.assertEquals("emergency referall", created.get(0).getValueText());
     }
 }
