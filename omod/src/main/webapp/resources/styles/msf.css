@@ -717,3 +717,8 @@ ul#formBreadcrumb li.doing > span, ul#formBreadcrumb li span#confirmation_label 
 	padding: 12px 24px;
 	margin: 8px;
 }
+
+.print-include {
+	display: none;
+	padding-bottom: 2em;
+}

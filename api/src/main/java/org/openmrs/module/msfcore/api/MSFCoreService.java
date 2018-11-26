@@ -33,31 +33,31 @@ import org.openmrs.module.msfcore.Pagination;
  */
 public interface MSFCoreService extends OpenmrsService {
 
-    public List<Concept> getAllConceptAnswers(Concept question);
+    List<Concept> getAllConceptAnswers(Concept question);
 
-    public List<DropDownFieldOption> getAllConceptAnswerNames(String uuid);
+    List<DropDownFieldOption> getAllConceptAnswerNames(String uuid);
 
-    public boolean isConfigured();
+    boolean isConfigured();
 
-    public String getInstanceId();
+    String getInstanceId();
 
-    public List<Location> getMSFLocations();
+    List<Location> getMSFLocations();
 
-    public String getLocationCode(Location location);
+    String getLocationCode(Location location);
 
-    public void saveInstanceId(String instanceId);
+    void saveInstanceId(String instanceId);
 
-    public LocationAttribute getLocationCodeAttribute(Location location);
+    LocationAttribute getLocationCodeAttribute(Location location);
 
-    public void saveDefaultLocation(Location location);
+    void saveDefaultLocation(Location location);
 
-    public void msfIdentifierGeneratorInstallation();
+    void msfIdentifierGeneratorInstallation();
 
-    public void saveSequencyPrefix(SequentialIdentifierGenerator generator);
+    void saveSequencyPrefix(SequentialIdentifierGenerator generator);
 
-    public void overwriteSync2Configuration();
+    void overwriteSync2Configuration();
 
-    public String getCurrentLocationIdentity();
+    String getCurrentLocationIdentity();
 
     /**
      * @param enrollment,
@@ -72,14 +72,12 @@ public interface MSFCoreService extends OpenmrsService {
      *            used for form managed states
      * @return patientProgram generated or null
      */
-    public PatientProgram generatePatientProgram(boolean enrollment, Map<String, ProgramWorkflowState> states,
-                    PatientProgram patientProgram, Encounter ecnounter);
+    PatientProgram generatePatientProgram(boolean enrollment, Map<String, ProgramWorkflowState> states, PatientProgram patientProgram,
+                    Encounter ecnounter);
 
-    public Map<String, ProgramWorkflowState> getMsfStages();
+    Map<String, ProgramWorkflowState> getMsfStages();
 
-    public void manageNCDProgram(Encounter encounter);
-
-    public void saveTestOrders(Encounter encounter);
+    void manageNCDProgram(Encounter encounter);
 
     /**
      * @param patient

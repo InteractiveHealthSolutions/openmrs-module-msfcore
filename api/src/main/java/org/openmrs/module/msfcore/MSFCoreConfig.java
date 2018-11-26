@@ -23,6 +23,7 @@ public class MSFCoreConfig {
     public final static String REGISTRATION_APP_EXTENSION_ID = "referenceapplication.registrationapp.registerPatient";
 
     public final static String SEARCH_APP_EXTENSION_ID = "coreapps.findPatient";
+
     public final static String REPORTS_APP_EXTENSION_ID = "reportingui.reports";
 
     public final static String CONDITIONS_EXTENSION_ID = "coreapps.conditionlist";
@@ -40,6 +41,7 @@ public class MSFCoreConfig {
     public final static String OBS_GRAPH_EXTENSION_ID = "coreapps.obsGraph";
 
     public final static String GP_INSTANCE_ID = "msfcore.instanceId";
+
     public final static String GP_EMRAPI_EMRAPIVISITSASSIGNMENTHANDLER_ENCOUNTERTYPETONEWVISITTYPEMAP = "emrapi.EmrApiVisitAssignmentHandler.encounterTypeToNewVisitTypeMap";
 
     public final static String LOCATION_ATTR_TYPE_CODE_UUID = "5a504478-1701-49da-9d8b-3e1d12ab6c5a";
@@ -389,8 +391,6 @@ public class MSFCoreConfig {
 
     public static final String HTMLFORM_REQUEST_APPOINTMENT_UUID = "f09a3a3a-810e-4cf6-b432-3d43da303911";
 
-    public static final String HTMLFORM_REQUEST_INVESTIGATION_UUID = "fc14cfa5-6cbc-47bf-9674-efdcc7628350";
-
     public static final String CONCEPT_REQUEST_APPOINTMENT_DATE_UUID = "c72e7dce-e9eb-44e9-8114-94f9550ad5b0";
 
     public static final String CONCEPT_REQUEST_APPOINTMENT_COMMENT_UUID = "f3a76818-3ff4-4d94-9c51-be295cad43a1";
@@ -435,6 +435,22 @@ public class MSFCoreConfig {
 
     public static final String CONCEPT_REQUEST_APPOINTMENT_TYPE_UUID = "d0475b32-6987-43b3-a618-b975f4967ba5";
 
+    public static final String CONCEPT_DOSE_UUID = "160856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String CONCEPT_DOSE_UNIT_UUID = "d09764da-2bf1-4ab6-933f-07a50add8f33";
+
+    public static final String CONCEPT_DURATION_UUID = "159368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String CONCEPT_FREQUENCY_UUID = "160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String CONCEPT_DURATION_UNIT_UUID = "161244AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String CONCEPT_ROUTE_ORAL_UUID = "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String CONCEPT_PRESCRIBED_MEDICATION_UUID = "17110937-6cb2-42f9-b932-3f79e9506a1d";
+
+    public static final String CONCEPT_ADMINISTRATION_INSTRUCTIONS_UUID = "163106AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
     // Form UUIDS
     public static final String FORM_NCD_BASELINE_MEDICAL_HISTORY_UUID = "06807e2b-ce97-4d65-8796-e955fcbe057d";
 
@@ -476,7 +492,31 @@ public class MSFCoreConfig {
 
     public static final String FORM_NCD_FOLLOWUP_REQUEST_APPOINTMENT_UUID = "5ec65100-d821-11e8-a2f8-07cd972bc32b";
 
-    public static final String CONCEPT_UUID_DESPENSED = "5000036AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    public static final String ALLERGY_TYPE_UUID = "cab5578c-0c62-4582-b668-28e3f218b635";
+
+    public static final String ALLERGIC_REACTIONS_UUID = "456ce14a-a5f0-4c3e-bf13-2feb3dfb26dc";
+
+    public static final String COMMENT_UUID = "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String ALLERGY_PROBLEM_SEVERITY_UUID = "162820AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String REFERENCE_APPLICATION_COMMON_FOOD_ALLERGENS_UUID = "162553AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String REFERENCE_APPLICATION_COMMON_DRUG_ALLERGENS_UUID = "162552AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String REFERENCE_APPLICATION_COMMON_ENVIROMENTAL_ALLERGENS_UUID = "162554AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String ALLERGY_UUID = "73c9a85e-7de9-4b35-97ec-03d693f56fab";
+
+    public static final String FOOD_ALLERGY_LIST_UUID = "1325f5d0-bbb8-402a-a6dc-21d7c6f82330";
+
+    public static final String DRUG_ALLERGY_LIST_UUID = "1141bd11-1f91-4af7-a8d7-a26394140e08";
+
+    public static final String OTHER_ALLERGY_LIST_UUID = "a0740eb7-92cd-4f79-a9b2-08e0f363532e";
+
+    public static final String CONCEPT_SET_LAB_ORDERS_UUID = "23281464-74d8-47d9-9a39-7a1f1d7caa49";
+
+    public static final String CONCEPT_UUID_DISPENSED = "5000036AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
     public static final String CONCEPT_UUID_DESPENSED_DATE = "5000039AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
@@ -489,4 +529,19 @@ public class MSFCoreConfig {
     public static final String ADMIT_TO_INPATIENT_EXTENSION_ID = "referenceapplication.realTime.simpleAdmission";
 
     public static final String VISIT_NOTE_EXTENSION_ID = "referenceapplication.realTime.simpleVisitNote";
+
+    public static final String PERSON_ATTRIBUTE_OTHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd1";
+
+    public static final String PERSON_ATTRIBUTE_AUNT_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd2";
+
+    public static final String PERSON_ATTRIBUTE_UNCLE_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd3";
+
+    public static final String PERSON_ATTRIBUTE_BROTHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd4";
+
+    public static final String PERSON_ATTRIBUTE_SISTER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd5";
+
+    public static final String PERSON_ATTRIBUTE_MOTHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd6";
+
+    public static final String PERSON_ATTRIBUTE_FATHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd7";
+
 }

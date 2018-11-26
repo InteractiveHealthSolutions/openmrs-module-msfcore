@@ -18,6 +18,8 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.Concept;
 import org.openmrs.ConceptAnswer;
+import org.openmrs.Drug;
+import org.openmrs.DrugOrder;
 import org.openmrs.Location;
 import org.openmrs.LocationAttribute;
 import org.openmrs.LocationAttributeType;
@@ -116,5 +118,13 @@ public class MSFCoreDao extends MSFCoreBaseDao {
             crit.add(Restrictions.eq("concept", concept));
         }
         return crit.list();
+    }
+
+    public DrugOrder getDrugOrder(Integer id) {
+        return (DrugOrder) getSession().get(DrugOrder.class, id);
+    }
+
+    public Drug getDrugByConcept(Concept medication) {
+        return (Drug) getSession().createCriteria(Drug.class).add(Restrictions.eq("concept", medication)).uniqueResult();
     }
 }
