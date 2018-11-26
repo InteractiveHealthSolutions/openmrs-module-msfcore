@@ -120,7 +120,7 @@ daterangepicker button {
     padding:2px;
 }
 
-.angular-datepicker .datepicker-input, 
+.angular-datepicker .datepicker-input,
 .angular-datepicker .icon-calendar {
     top: -1px;
 }
@@ -201,7 +201,7 @@ ul#formBreadcrumb li:last-child {
 
 /* Icon Addon */
 .add-on, 
-.selectedAppointmentTypesList, 
+.selectedAppointmentTypesList,
 .selectedAppointmentTypesList > .add-on {
     background: #55D6BE;
     border-radius: 0 4px 4px 0;
@@ -410,4 +410,15 @@ div#actions {
 
 #appointment-block-form table {
     box-shadow: none;
+}
+
+span.error, label.error {
+    border: 2px dotted #fb0303;
+    color: #fb0303;
+}
+
+input.error {
+    background-color: #ffffff;
+    border: 1px solid #0808fd;
+    border-radius: 0;
 }

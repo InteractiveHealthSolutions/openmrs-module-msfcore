@@ -1,10 +1,24 @@
 /**
- * Print html from entire page ignoring some elements
+ * Print html from entire page hiding and/or showing some elements
  */
-function printPageWithIgnore(elements) {
-    jQuery(elements).hide();
+function printPageWithIgnoreInclude(elementsToIgnore, elementsToInclude) {
+	hideElements(elementsToIgnore);
+	showElements(elementsToInclude);
     window.print();
-    jQuery(elements).show();
+    showElements(elementsToIgnore);
+    hideElements(elementsToInclude);
+}
+
+function hideElements(elements) {
+	if(elements) {
+		jQuery(elements).hide();
+	}
+}
+
+function showElements(elements) {
+	if(elements) {
+		jQuery(elements).show();
+	}
 }
 
 /**
@@ -79,6 +93,9 @@ function parseInteger(string) {
  * Converts a date to a given dateFormat pattern (transforms the pattern if java to js)
  */
 function convertToDateFormat(dateFormatPattern, date) {
+	if(typeof date == "string" || typeof date == "number") {
+		date = new Date(date);
+	}
     return jQuery.datepicker.formatDate(dateFormatPattern.toLowerCase().replace("yyyy", "yy"), date);
 }
 

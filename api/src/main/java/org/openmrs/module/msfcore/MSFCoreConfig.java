@@ -88,6 +88,8 @@ public class MSFCoreConfig {
 
     public final static String PERSON_ATTRIBUTE_PROVENANCE_UUID = "4a504478-1701-49da-9d8b-3e1d12ab6c5p";
 
+    public final static String PERSON_ATTRIBUTE_TELEPHONE_UUID = "14d4f066-15f5-102d-96e4-000c29c2a5d7";
+
     public final static String PERSON_ATTRIBUTE_MARITAL_STATUS_UUID = "4a504478-1701-49da-9d8b-3e1d12ab6c5q";
 
     public final static String PERSON_ATTRIBUTE_CONDITION_OF_LIVING_UUID = "b6eddbee-1721-4dfa-a79a-8d545043da35";
@@ -391,8 +393,6 @@ public class MSFCoreConfig {
 
     public static final String HTMLFORM_REQUEST_APPOINTMENT_UUID = "f09a3a3a-810e-4cf6-b432-3d43da303911";
 
-    public static final String HTMLFORM_REQUEST_INVESTIGATION_UUID = "fc14cfa5-6cbc-47bf-9674-efdcc7628350";
-
     public static final String CONCEPT_REQUEST_APPOINTMENT_DATE_UUID = "c72e7dce-e9eb-44e9-8114-94f9550ad5b0";
 
     public static final String CONCEPT_REQUEST_APPOINTMENT_COMMENT_UUID = "f3a76818-3ff4-4d94-9c51-be295cad43a1";
@@ -518,13 +518,19 @@ public class MSFCoreConfig {
 
     public static final String CONCEPT_SET_LAB_ORDERS_UUID = "23281464-74d8-47d9-9a39-7a1f1d7caa49";
 
-    public static final String CONCEPT_UUID_DESPENSED = "5000036AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    public static final String CONCEPT_UUID_DISPENSED = "5000036AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
     public static final String CONCEPT_UUID_DESPENSED_DATE = "5000039AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
     public static final String CONCEPT_UUID_DESPENSED_DETAILS = "5000040AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
     public static final String ENCOUNTER_TYPE_DISPENSE_DRUG_UUID = "0aa6553b-be5z-413a-93fr-23962bc594e0";
+
+    public static final String CHART_SEARCH_EXTENSION_ID = "chartsearch.chartSearchLink";
+
+    public static final String ADMIT_TO_INPATIENT_EXTENSION_ID = "referenceapplication.realTime.simpleAdmission";
+
+    public static final String VISIT_NOTE_EXTENSION_ID = "referenceapplication.realTime.simpleVisitNote";
 
     public static final String PERSON_ATTRIBUTE_OTHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd1";
 
@@ -547,4 +553,5 @@ public class MSFCoreConfig {
     public static final String PERSON_ATTRIBUTE_ABLE_TO_READ_UUID = "ebb49035-b40b-4659-a1c6-0cb3ceade639";
 
     public static final String PERSON_ATTRIBUTE_ABLE_TO_WRITE_UUID = "ccf9a5cf-c6ff-456c-b8f3-3cf3f02b4150";
+
 }

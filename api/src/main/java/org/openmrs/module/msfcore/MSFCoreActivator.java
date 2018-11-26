@@ -45,8 +45,13 @@ public class MSFCoreActivator extends BaseModuleActivator {
     public void started() {
         log.info("Started MSF Core Module");
 
-        Context.getService(DHISService.class).transferDHISMappingsToDataDirectory();
-        Context.getService(DHISService.class).installDHIS2Metadata();
+        try {
+            Context.getService(DHISService.class).transferDHISMappingsToDataDirectory();
+            Context.getService(DHISService.class).installDHIS2Metadata();
+        } catch (Exception e) {
+            log.info("Error thrown when configuring Dhis2 metadata: " + e.getMessage());
+        }
+
         Context.getService(MSFCoreService.class).overwriteSync2Configuration();
 
         triggerMSFApps(true);
@@ -81,6 +86,9 @@ public class MSFCoreActivator extends BaseModuleActivator {
             Context.getService(AppFrameworkService.class).disableApp(MSFCoreConfig.MOST_RECENT_VITALS_EXTENSION_ID);
             Context.getService(AppFrameworkService.class).disableApp(MSFCoreConfig.VISIT_BY_ENCOUNTER_TYPE_EXTENSION_ID);
             Context.getService(AppFrameworkService.class).disableApp(MSFCoreConfig.OBS_GRAPH_EXTENSION_ID);
+            Context.getService(AppFrameworkService.class).disableExtension(MSFCoreConfig.CHART_SEARCH_EXTENSION_ID);
+            Context.getService(AppFrameworkService.class).disableExtension(MSFCoreConfig.ADMIT_TO_INPATIENT_EXTENSION_ID);
+            Context.getService(AppFrameworkService.class).disableExtension(MSFCoreConfig.VISIT_NOTE_EXTENSION_ID);
         } else {
             log.info("Enabling default reference application apps");
             Context.getService(AppFrameworkService.class).enableApp(MSFCoreConfig.REGISTRATION_APP_EXTENSION_ID);
@@ -94,6 +102,9 @@ public class MSFCoreActivator extends BaseModuleActivator {
             Context.getService(AppFrameworkService.class).enableApp(MSFCoreConfig.MOST_RECENT_VITALS_EXTENSION_ID);
             Context.getService(AppFrameworkService.class).enableApp(MSFCoreConfig.VISIT_BY_ENCOUNTER_TYPE_EXTENSION_ID);
             Context.getService(AppFrameworkService.class).enableApp(MSFCoreConfig.OBS_GRAPH_EXTENSION_ID);
+            Context.getService(AppFrameworkService.class).enableExtension(MSFCoreConfig.CHART_SEARCH_EXTENSION_ID);
+            Context.getService(AppFrameworkService.class).enableExtension(MSFCoreConfig.ADMIT_TO_INPATIENT_EXTENSION_ID);
+            Context.getService(AppFrameworkService.class).enableExtension(MSFCoreConfig.VISIT_NOTE_EXTENSION_ID);
         }
     }
 

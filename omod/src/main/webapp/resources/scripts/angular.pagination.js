@@ -42,8 +42,8 @@ function getPageObject(page, pageUrl) {
  * Removes pagination parameters from a urlString
  */
 function removePaginationFromURL(urlString) {
-    if (urlString.indexOf("&fromItemNumber=") > 0) {
-        urlString = urlString.substring(0, urlString.indexOf("&fromItemNumber="));
+    if (urlString.indexOf("fromItemNumber=") > 0) {
+        urlString = urlString.substring(0, urlString.indexOf("fromItemNumber="));
     }
     return urlString;
 }
@@ -89,7 +89,12 @@ function renderPagination($scope, pagination, initialisePages) {
  */
 function replacePaginationInURL(urlString, from, to) {
     urlString = removePaginationFromURL(urlString);
-    return urlString + "&fromItemNumber=" + from + "&toItemNumber=" + to;
+    if(urlString.indexOf("?") == -1) {
+    	urlString += "?fromItemNumber=" + from;
+    } else {
+    	urlString += "&fromItemNumber=" + from;
+    }
+    return (urlString + "&toItemNumber=" + to).replace("?&", "?");
 }
 
 /**

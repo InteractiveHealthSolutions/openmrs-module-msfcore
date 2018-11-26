@@ -162,7 +162,7 @@ public class ResultsData {
     private void addDrugOrders(Order o) {
         ResultRow resultRow = new ResultRow();
         DrugOrder drugOrder = (DrugOrder) o;
-        Concept dispensedConcept = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_DESPENSED);
+        Concept dispensedConcept = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_DISPENSED);
         Obs dispensedObs = getResultObs(drugOrder, dispensedConcept);
         Obs dispensedDateObs = getResultObs(drugOrder, Context.getConceptService().getConceptByUuid(
                         MSFCoreConfig.CONCEPT_UUID_DESPENSED_DATE));
@@ -390,7 +390,7 @@ public class ResultsData {
             DrugOrder drugOrder = (DrugOrder) Context.getOrderService().getOrderByUuid(idContent[0]);
             if (key.equals(Context.getMessageSourceService().getMessage("msfcore.dispensed"))) {
                 obs = retrieveOrCreateObs(obs, drugOrder, Context.getConceptService()
-                                .getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_DESPENSED), ResultCategory.DRUG_LIST);
+                                .getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_DISPENSED), ResultCategory.DRUG_LIST);
                 obs.setValueCoded(Context.getConceptService().getConceptByUuid(value));
             } else if (key.equals(Context.getMessageSourceService().getMessage("msfcore.dispenseDate"))) {
                 obs = retrieveOrCreateObs(obs, drugOrder, Context.getConceptService().getConceptByUuid(
