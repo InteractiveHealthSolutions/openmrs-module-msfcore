@@ -364,6 +364,8 @@ function logViewResultsEvent(results) {
         event = "VIEW_LAB_RESULTS";
     } else if (results.resultCategory == "DRUG_LIST") {
         event = "VIEW_DRUG_DISPENSING";
+    } else if (results.resultCategory == "REFERRAL_LIST") {
+        event = "VIEW_PATIENT_REFERRALS";
     }
     if (event) {
         var data = {
