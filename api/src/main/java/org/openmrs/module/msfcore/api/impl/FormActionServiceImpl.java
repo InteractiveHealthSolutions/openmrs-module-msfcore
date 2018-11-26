@@ -64,8 +64,7 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
 
         Concept labOrdersSetConcept = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_SET_LAB_ORDERS_UUID);
         List<Obs> labOrderObs = encounter.getObsAtTopLevel(true).stream()
-                .filter(o -> labOrdersSetConcept.getSetMembers().contains(o.getConcept()))
-                .collect(Collectors.toList());
+                        .filter(o -> labOrdersSetConcept.getSetMembers().contains(o.getConcept())).collect(Collectors.toList());
 
         for (Obs obs : labOrderObs) {
             Order existingOrder = obs.getOrder();
@@ -114,14 +113,12 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         encounterService.saveEncounter(encounter);
     }
     private boolean isTestOrderFulfilled(Order order) {
-        Concept labOrdersSetConcept = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_SET_LAB_ORDERS_UUID);
-        if (order != null && labOrdersSetConcept.getSetMembers().contains(order.getConcept())) {
-            // The members of the lab order concept are the lab result concepts
-            for (Concept concept : order.getConcept().getSetMembers()) {
-                if (dao.getObservationsByOrderAndConcept(order, concept).size() > 0) {
-                    return true;
-                }
-            }
+        if (order != null) {
+            Optional<Obs> result = dao
+                            .getObservationsByOrderAndConcept(order, null).stream().filter(o -> !o.getVoided() && o.getEncounter()
+                                            .getEncounterType().getUuid().equals(MSFCoreConfig.ENCOUNTER_TYPE_LAB_RESULTS_UUID))
+                            .findFirst();
+            return result.isPresent();
         }
         return false;
     }
@@ -138,7 +135,8 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         return false;
     }
 
-    private TestOrder createTestOrder(Encounter encounter, OrderType orderType, Provider provider, CareSetting careSetting, Concept concept) {
+    private TestOrder createTestOrder(Encounter encounter, OrderType orderType, Provider provider, CareSetting careSetting,
+                    Concept concept) {
         TestOrder order = new TestOrder();
         order.setOrderType(orderType);
         order.setConcept(concept);
@@ -159,9 +157,10 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
     private boolean isOrderModified(DrugOrder order, Order currentOrder) {
         if (currentOrder != null) {
             DrugOrder other = dao.getDrugOrder(currentOrder.getId());
-            boolean equals = new EqualsBuilder().append(order.getDrug().getId(), other.getDrug().getId()).append(order.getDose(),
-                            other.getDose()).append(order.getDoseUnits().getId(), other.getDoseUnits().getId()).append(
-                            order.getFrequency().getId(), other.getFrequency().getId()).append(order.getDuration(), other.getDuration())
+            boolean equals = new EqualsBuilder().append(order.getDrug().getId(), other.getDrug().getId())
+                            .append(order.getDose(), other.getDose()).append(order.getDoseUnits().getId(), other.getDoseUnits().getId())
+                            .append(order.getFrequency().getId(), other.getFrequency().getId())
+                            .append(order.getDuration(), other.getDuration())
                             .append(order.getDurationUnits().getId(), other.getDurationUnits().getId()).isEquals();
             return !equals;
         }
