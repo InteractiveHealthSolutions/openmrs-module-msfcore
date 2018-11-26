@@ -65,7 +65,7 @@
 							<when value="5622" thenDisplay="#placeofvisit-other"/>
 						</controls>
 					</obs>
-					<obs id="placeofvisit-other" conceptId="7000010" labelCode="msfcore.ncdfollowup.visitdetails.placeofvisit.other" />
+					<obs id="placeofvisit-other" conceptId="ce1ba47e-7634-469a-823a-a08af93b1006" labelCode="msfcore.ncdfollowup.visitdetails.placeofvisit.other" />
 					<br />
 					<h4><lookup expression="fn.getConcept('5a6fd31e-ff1b-42da-a6f5-3cfeaf568ad3').name"/></h4>
 					<obs conceptId="5a6fd31e-ff1b-42da-a6f5-3cfeaf568ad3" />
