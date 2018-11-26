@@ -43,8 +43,7 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
         executeDataSet("FormActionService.xml");
         Encounter encounter = Context.getEncounterService().getEncounter(29);
 
-        List<Order> existingOrders = encounter.getOrders().stream().filter(o -> !o.getVoided())
-                .collect(Collectors.toList());
+        List<Order> existingOrders = encounter.getOrders().stream().filter(o -> !o.getVoided()).collect(Collectors.toList());
         assertThat(existingOrders.size(), is(1));
         assertThat(existingOrders.get(0).getConcept().getId(), is(5000010));
 
@@ -105,20 +104,8 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
     public void saveTestOrders_shouldNotVoidOrderIfOrderIsFulfilled() {
         executeDataSet("FormActionService.xml");
         Encounter encounter = Context.getEncounterService().getEncounter(31);
-
-        List<Order> existingOrders = encounter.getOrders().stream().collect(Collectors.toList());
-        assertThat(existingOrders.size(), is(1));
-        assertThat(existingOrders.get(0).getConcept().getId(), is(5000012));
-        assertThat(existingOrders.get(0).getVoided(), is(false));
-
-        // execute test
         formActionService.saveTestOrders(encounter);
-
-        List<Order> updatedOrders = encounter.getOrders().stream().collect(Collectors.toList());
-
-        assertThat(updatedOrders.size(), is(1));
-        assertThat(updatedOrders.get(0).getConcept().getId(), is(5000012));
-        assertThat(updatedOrders.get(0).getVoided(), is(false));
+        Assert.assertFalse(Context.getOrderService().getOrder(3).getVoided());
     }
 
     @Test
