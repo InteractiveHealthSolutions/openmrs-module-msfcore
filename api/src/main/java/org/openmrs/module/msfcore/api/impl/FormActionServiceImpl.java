@@ -80,6 +80,7 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
                 orderService.voidOrder(existingOrder, ORDER_VOID_REASON);
             }
         }
+        Context.getEncounterService().saveEncounter(encounter);
     }
     @Override
     public void saveDrugOrders(Encounter encounter) {
