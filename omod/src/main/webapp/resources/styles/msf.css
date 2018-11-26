@@ -192,13 +192,11 @@ a.visited {
     display: flex;
     flex-direction: column;
     /*padding:3rem 0 6rem 0;*/
-}
-
-#content.container {
     margin: 3rem 0 6rem 0;
     border-radius: 8px;
     /*background: #fff;
     box-shadow: rgba(0,0,0,0.1) 0 4px 8px;*/
+    position: relative;
 }
 
 /* UTILITY CLASSES */
@@ -745,6 +743,18 @@ ul#formBreadcrumb li.doing > span, ul#formBreadcrumb li span#confirmation_label 
     position: absolute;
     left: 40vw;
     top: 30vh;
+}
+
+#form-actions-container a i {display: none}
+
+.showing-pages,.pages {
+	padding: 12px 24px;
+	margin: 8px;
+}
+
+.print-include {
+	display: none;
+	padding-bottom: 2em;
 }
 
 /* Audit Logs */

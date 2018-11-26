@@ -45,8 +45,13 @@ public class MSFCoreActivator extends BaseModuleActivator {
     public void started() {
         log.info("Started MSF Core Module");
 
-        Context.getService(DHISService.class).transferDHISMappingsToDataDirectory();
-        Context.getService(DHISService.class).installDHIS2Metadata();
+        try {
+            Context.getService(DHISService.class).transferDHISMappingsToDataDirectory();
+            Context.getService(DHISService.class).installDHIS2Metadata();
+        } catch (Exception e) {
+            log.info("Error thrown when configuring Dhis2 metadata: " + e.getMessage());
+        }
+
         Context.getService(MSFCoreService.class).overwriteSync2Configuration();
 
         triggerMSFApps(true);
@@ -100,12 +105,18 @@ public class MSFCoreActivator extends BaseModuleActivator {
     private void installMSFMeta() {
         // install concepts
         DataImporter dataImporter = Context.getRegisteredComponent("dataImporter", DataImporter.class);
+
         log.info("Importing MSF CIEL Concepts");
         dataImporter.importData("CIELConcepts.xml");
         log.info("MSF CIEL Concepts imported");
+
         log.info("Importing MSF Custom Concepts");
         dataImporter.importData("MSFCustomConcepts.xml");
         log.info("MSF Custom Concepts imported");
+
+        log.info("Importing MSF Drugs");
+        dataImporter.importData("MSFDrugs.xml");
+        log.info("MSF Drugs imported");
 
         log.info("Installing MSF metadata bundle");
         Context.getService(MetadataDeployService.class).installBundle(Context.getRegisteredComponents(MSFMetadataBundle.class).get(0));
@@ -209,6 +220,7 @@ public class MSFCoreActivator extends BaseModuleActivator {
         triggerMSFApps(false);
         removeMSFMeta();
         Context.getAdministrationService().updateGlobalProperty(MSFCoreConfig.GP_MANADATORY, "false");
+        removeMsfForms();
         super.willStop();
     }
 
@@ -225,6 +237,18 @@ public class MSFCoreActivator extends BaseModuleActivator {
         try {
             HtmlFormsInitializer htmlFormsInitializer = new HtmlFormsInitializer("msfcore");
             htmlFormsInitializer.started();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Installing MSF Forms
+     */
+    private void removeMsfForms() {
+        try {
+            HtmlFormsInitializer htmlFormsInitializer = new HtmlFormsInitializer("msfcore");
+            htmlFormsInitializer.stopped();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }

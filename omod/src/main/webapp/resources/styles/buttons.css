@@ -477,3 +477,7 @@ button {outline: none}
 .button.confirm.active, button.confirm.active, input[type="submit"].confirm.active, input[type="button"].confirm.active, input[type="submit"].confirm.active, a.button.confirm.active {
   background: #D0FEF5;
 }
+div#similarPatientsSlideView ul#similarPatientsSelect button.local_button{
+  padding: 12px 24px;
+  margin: 8px;
+}

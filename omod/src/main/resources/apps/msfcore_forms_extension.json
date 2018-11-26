@@ -1,30 +1,21 @@
 [
   {
     "id":"mshforms.ncdFollowupForm",
-    "extensionPointId":"patientDashboard.overallActions",
+    "extensionPointId":"patientDashboard.visitActions",
     "type":"link",
     "label":"NCD Followup Form",
     "url":"msfcore/followupInitial.page?patientId={{patient.patientId}}&visitId={{patient.activeVisitId}}&formUuid=6b12c748-d81e-11e8-9bc4-074e329091e5",
     "icon":"icon-file",
-    "order":22
+    "order":30
   },
   {
     "id":"mshforms.ncdBaselineConsultationForm",
-    "extensionPointId":"patientDashboard.overallActions",
+    "extensionPointId":"patientDashboard.visitActions",
     "type":"link",
     "label":"NCD Baseline Consultation Form",
     "url":"msfcore/medicalHistoryRedirect.page?patientId={{patient.patientId}}&visitId={{patient.activeVisitId}}&formUuid=06807e2b-ce97-4d65-8796-e955fcbe057d",
     "icon":"icon-medkit",
-    "order":23
-  },
-  {
-    "id":"mshforms.labResultsForm",
-    "extensionPointId":"patientDashboard.overallActions",
-    "type":"link",
-    "label":"Lab Results Form",
-    "url":"htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId={{patient.patientId}}&visitId={{patient.activeVisitId}}&formUuid=db5f9aea-fb3f-4f55-82c8-04f489ae8304",
-    "icon":"icon-medkit",
-    "order":24
+    "order":25
   },
   {
     "id":"mshforms.exitFromNCDForm",
