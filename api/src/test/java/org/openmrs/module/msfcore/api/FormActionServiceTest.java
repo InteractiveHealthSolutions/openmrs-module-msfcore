@@ -220,7 +220,7 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
         Assert.assertTrue(observationsWithOrders.stream().filter(o -> o.getConcept().getConceptId().intValue() == 463405).findAny()
                         .isPresent());
         Assert.assertEquals(2,
-                        encounter.getOrders().stream().filter(order -> "Comments for all referrals".equals(order.getFulfillerComment()))
+                        encounter.getOrders().stream().filter(order -> "Comments for all referrals".equals(order.getOrderReasonNonCoded()))
                                         .collect(Collectors.toList()).size());
     }
     @Test

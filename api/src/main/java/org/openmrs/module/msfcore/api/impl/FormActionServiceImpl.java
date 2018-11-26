@@ -139,7 +139,7 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         Optional<Obs> reasonForReferral = encounter.getAllObs(false).stream()
                         .filter(o -> o.getConcept().getUuid().equals(MSFCoreConfig.CONCEPT_REASON_FOR_REFERRAL_UUID)).findAny();
         for (Obs obs : observations) {
-            if (obs.getOrder() == null) {
+            if (!obs.getVoided() && obs.getOrder() == null) {
                 Concept concept = obs.getConcept();
                 Order order = createReferralOrder(encounter, provider, careSetting, concept, reasonForReferral);
                 orderService.saveOrder(order, orderContext);
@@ -193,7 +193,7 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         order.setOrderer(provider);
         order.setCareSetting(careSetting);
         if (reasonForReferral.isPresent()) {
-            order.setFulfillerComment(reasonForReferral.get().getValueText());
+            order.setOrderReasonNonCoded(reasonForReferral.get().getValueText());
         }
         encounter.addOrder(order);
         return order;
