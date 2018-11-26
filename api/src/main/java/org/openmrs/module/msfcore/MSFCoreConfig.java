@@ -88,6 +88,8 @@ public class MSFCoreConfig {
 
     public final static String PERSON_ATTRIBUTE_PROVENANCE_UUID = "4a504478-1701-49da-9d8b-3e1d12ab6c5p";
 
+    public final static String PERSON_ATTRIBUTE_TELEPHONE_UUID = "14d4f066-15f5-102d-96e4-000c29c2a5d7";
+
     public final static String PERSON_ATTRIBUTE_MARITAL_STATUS_UUID = "4a504478-1701-49da-9d8b-3e1d12ab6c5q";
 
     public final static String PERSON_ATTRIBUTE_CONDITION_OF_LIVING_UUID = "b6eddbee-1721-4dfa-a79a-8d545043da35";
