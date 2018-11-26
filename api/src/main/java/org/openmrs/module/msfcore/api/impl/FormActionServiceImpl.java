@@ -193,7 +193,7 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         order.setOrderer(provider);
         order.setCareSetting(careSetting);
         if (reasonForReferral.isPresent()) {
-            order.setFulfillerComment(reasonForReferral.get().getValueText());
+            order.setOrderReasonNonCoded(reasonForReferral.get().getValueText());
         }
         encounter.addOrder(order);
         return order;
