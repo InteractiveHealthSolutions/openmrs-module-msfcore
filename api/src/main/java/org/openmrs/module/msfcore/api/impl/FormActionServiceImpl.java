@@ -33,6 +33,7 @@ import org.openmrs.OrderType;
 import org.openmrs.Provider;
 import org.openmrs.TestOrder;
 import org.openmrs.api.EncounterService;
+import org.openmrs.api.OrderContext;
 import org.openmrs.api.OrderService;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
@@ -125,9 +126,33 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
     }
     @Override
     public void saveReferralOrders(Encounter encounter) {
-
+        OrderService orderService = Context.getOrderService();
+        EncounterService encounterService = Context.getEncounterService();
+        OrderType orderType = orderService.getOrderTypeByUuid(MSFCoreConfig.REFERRAL_ORDER_TYPE_UUID);
+        Provider provider = encounter.getEncounterProviders().iterator().next().getProvider();
+        CareSetting careSetting = orderService.getCareSettingByName(CareSetting.CareSettingType.OUTPATIENT.name());
+        OrderContext orderContext = new OrderContext();
+        orderContext.setOrderType(orderType);
+        Concept referralsSet = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_SET_REFERRAL_ORDERS_UUID);
+        List<Obs> observations = encounter.getAllObs(true).stream().filter(o -> referralsSet.getSetMembers().contains(o.getConcept()))
+                        .collect(Collectors.toList());
+        Optional<Obs> reasonForReferral = encounter.getAllObs(false).stream()
+                        .filter(o -> o.getConcept().getUuid().equals(MSFCoreConfig.CONCEPT_REASON_FOR_REFERRAL_UUID)).findAny();
+        for (Obs obs : observations) {
+            if (obs.getOrder() == null) {
+                Concept concept = obs.getConcept();
+                Order order = createReferralOrder(encounter, provider, careSetting, concept, reasonForReferral);
+                orderService.saveOrder(order, orderContext);
+                Obs newObs = Obs.newInstance(obs);
+                newObs.setOrder(order);
+                obs.setVoided(true);
+                encounter.addObs(newObs);
+            } else if (obs.getVoided() && obs.getOrder() != null && !obs.getOrder().getVoided()) {
+                orderService.voidOrder(obs.getOrder(), ORDER_VOID_REASON);
+            }
+        }
+        encounterService.saveEncounter(encounter);
     }
-
     private Optional<Order> getExistingOrder(Collection<Order> orders, Obs obs) {
         return orders.stream().filter(o -> o.getConcept().equals(obs.getConcept())).findAny();
     }
@@ -155,6 +180,21 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         order.setEncounter(encounter);
         order.setOrderer(provider);
         order.setCareSetting(careSetting);
+        encounter.addOrder(order);
+        return order;
+    }
+
+    private Order createReferralOrder(Encounter encounter, Provider provider, CareSetting careSetting, Concept concept,
+                    Optional<Obs> reasonForReferral) {
+        Order order = new Order();
+        order.setConcept(concept);
+        order.setPatient(encounter.getPatient());
+        order.setEncounter(encounter);
+        order.setOrderer(provider);
+        order.setCareSetting(careSetting);
+        if (reasonForReferral.isPresent()) {
+            order.setFulfillerComment(reasonForReferral.get().getValueText());
+        }
         encounter.addOrder(order);
         return order;
     }

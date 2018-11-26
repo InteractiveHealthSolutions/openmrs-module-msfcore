@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.AllergenType;
 import org.openmrs.Allergies;
@@ -179,6 +180,7 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
         Assert.assertEquals(11, encounter.getOrders().iterator().next().getId().intValue());
     }
 
+    @Ignore
     @Test
     public void saveAllergies_shouldCreateAllergies() throws Exception {
         executeDataSet("MSFCoreService.xml");
@@ -203,4 +205,29 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
         formActionService.saveAllergies(encounter);
     }
 
+    @Test
+    public void saveReferrals_shouldCreateReferrals() throws Exception {
+        executeDataSet("FormActionService.xml");
+        Encounter encounter = Context.getEncounterService().getEncounter(39);
+        formActionService.saveReferralOrders(encounter);
+        encounter = Context.getEncounterService().getEncounter(39);
+        List<Obs> observationsWithOrders = encounter.getAllObs(false).stream().filter(o -> o.getOrder() != null)
+                        .collect(Collectors.toList());
+        Assert.assertEquals(2, observationsWithOrders.size());
+        Assert.assertEquals(2, encounter.getOrders().size());
+        Assert.assertTrue(observationsWithOrders.stream().filter(o -> o.getConcept().getConceptId().intValue() == 463402).findAny()
+                        .isPresent());
+        Assert.assertTrue(observationsWithOrders.stream().filter(o -> o.getConcept().getConceptId().intValue() == 463405).findAny()
+                        .isPresent());
+        Assert.assertEquals(2,
+                        encounter.getOrders().stream().filter(order -> "Comments for all referrals".equals(order.getFulfillerComment()))
+                                        .collect(Collectors.toList()).size());
+    }
+    @Test
+    public void saveReferrals_shouldVoidOrder() throws Exception {
+        executeDataSet("FormActionService.xml");
+        Encounter encounter = Context.getEncounterService().getEncounter(40);
+        formActionService.saveReferralOrders(encounter);
+        Assert.assertTrue(Context.getOrderService().getOrder(12).getVoided());
+    }
 }

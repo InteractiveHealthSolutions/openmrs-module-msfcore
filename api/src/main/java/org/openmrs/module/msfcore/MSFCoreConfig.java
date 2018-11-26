@@ -453,6 +453,8 @@ public class MSFCoreConfig {
 
     public static final String CONCEPT_ADMINISTRATION_INSTRUCTIONS_UUID = "163106AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
+    public static final String CONCEPT_REASON_FOR_REFERRAL_UUID = "830817c9-e1f9-48a7-a20b-c927bca52891";
+
     // Form UUIDS
     public static final String FORM_NCD_BASELINE_MEDICAL_HISTORY_UUID = "06807e2b-ce97-4d65-8796-e955fcbe057d";
 

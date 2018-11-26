@@ -1,19 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 
-  <!-- TODO: This needs to be refactored and moved to a FormActionService.xml -->
-  
-  <global_property property="order.drugDosingUnitsConceptUuid" property_value="d09764da-2bf1-4ab6-933f-07a50add8f33" description="Specifies the uuid of the concept set where its members represent the possible drug dosing units" uuid="f7d3d1ef-64f1-4afc-8169-45aa8454ad10"/>
-  <global_property property="order.drugRoutesConceptUuid" property_value="162394AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" description="Specifies the uuid of the concept set where its members represent the possible drug routes" uuid="2a050d51-ccd9-4bec-92b5-477614816a1b"/>
-  <global_property property="order.durationUnitsConceptUuid" property_value="161244AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" description="Specifies the uuid of the concept set where its members represent the possible duration units" uuid="614b4d24-dc42-4ab8-97aa-8e67209ecdfb"/>
-
   <users user_id="1" system_id="admin" password="ffba0fa0e" salt="0ce631e4" creator="1" date_created="2005-01-01 00:00:00.0" person_id="1" retired="false" uuid="1c3db49d-440a-11e6-a65c-00e04c680037"/>
+
+  <order_type order_type_id="2" name="Drug Order" description="An order for a medication to be given to the patient" creator="1" date_created="2010-05-12 00:00:00.0" retired="false" uuid="131168f4-15f5-102d-96e4-000c29c2a5d8" java_class_name="org.openmrs.DrugOrder"/>
+  <order_type order_type_id="4" name="Referral order type" description="Referral&apos;s order type" creator="1" date_created="2018-11-22 12:21:38.0" retired="false" uuid="1bb0842a-ed99-11e8-8eb2-f2801f1b9fd1" java_class_name="org.openmrs.Order"/>
 
   <location location_id="6" name="Inpatient Ward" creator="1" date_created="2013-08-02 01:47:29.0" retired="false" uuid="b1a8b05e-3542-4037-bbd3-998ee9c40574" />
 
   <encounter_type encounter_type_id="9" name="NCD Baseline Encounter" description="Baseline NCD Assessment" creator="1" date_created="2018-10-17 19:57:15.0" retired="false" uuid="fa6f3ff5-b784-43fb-ab35-a08ab7dbf074" />
 
   <form form_id="9" name="Prescribe Medication" version="1.1" published="false" encounter_type="9" creator="1" date_created="2018-10-29 21:42:46.0" retired="false" uuid="aab2cab6-c280-438b-9afd-3c54e799ef2a"/>
+  <form form_id="12" name="Refer Patient" version="1.1" published="false" encounter_type="9" creator="1" date_created="2018-10-29 21:42:46.0" retired="false" uuid="a9f3411c-03d8-4652-8143-886d572cbf4d"/>
 
   <person person_id="7" gender="M" birthdate="1981-02-10" birthdate_estimated="false" dead="false" creator="1" date_created="2018-10-16 13:36:21.0" voided="false" uuid="5af83186-c59b-428f-b01b-435cc3d8e88d" deathdate_estimated="false"/>
 
@@ -82,9 +80,22 @@
   <concept concept_id="924" retired="false" datatype_id="4" class_id="3" is_set="false" creator="1" date_created="2004-07-23 00:00:00.0" uuid="924AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
   <concept concept_id="5000036" retired="false" datatype_id="2" class_id="11" is_set="true" creator="1" date_created="2018-11-16 23:36:22.0" changed_by="1" date_changed="2018-11-16 23:36:22.0" uuid="5000036AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
   <concept concept_id="5000037" retired="false" datatype_id="4" class_id="2" is_set="false" creator="1" date_created="2018-11-16 23:36:22.0" changed_by="1" date_changed="2018-11-16 23:36:22.0" uuid="5000037AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+  <concept concept_id="463402" retired="false" datatype_id="10" class_id="4" is_set="false" creator="1" date_created="2017-10-31 17:49:56.0" changed_by="1" date_changed="2017-11-20 05:13:43.0" uuid="5668d9a1-4182-4ab2-ab62-f0dbebcafb8c"/>
+  <concept concept_id="463405" retired="false" datatype_id="10" class_id="4" is_set="false" creator="1" date_created="2017-10-31 17:50:00.0" changed_by="1" date_changed="2017-11-20 05:18:04.0" uuid="c60dd729-fe69-4b06-9aed-8f49d08e0972"/>
+  <concept concept_id="1000000" retired="false" datatype_id="3" class_id="7" is_set="false" creator="1" date_created="2018-10-01 14:46:04.0" changed_by="1" date_changed="2018-10-01 14:46:04.0" uuid="830817c9-e1f9-48a7-a20b-c927bca52891"/>
+  <concept concept_id="7000009" retired="false" datatype_id="4" class_id="10" is_set="true" creator="1" date_created="2018-11-22 11:39:41.0" changed_by="1" date_changed="2018-11-22 11:39:41.0" retired_by="1" uuid="51d1044c-b97a-406f-93c8-324b6bee1e61"/>
+
+  <concept_description concept_description_id="18164" concept_id="7000009" description="Set that contains all the referral orders concepts." locale="en" creator="1" date_created="2018-11-22 11:39:41.0" changed_by="1" uuid="e945c73d-741b-4faf-b604-dc85bbc02bce"/>
 
   <concept_name concept_name_id="109543" concept_id="160858" name="Twice daily" locale="en" locale_preferred="true" creator="1" date_created="2012-07-16 01:24:20.0" concept_name_type="FULLY_SPECIFIED" voided="false" uuid="109543BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" changed_by="1"/>
+  <concept_name concept_name_id="441460" concept_id="463402" name="Emergency ward" locale="en" locale_preferred="true" creator="1" date_created="2017-10-31 17:49:56.0" concept_name_type="FULLY_SPECIFIED" voided="false" uuid="eefaf867-97e4-4c43-b043-6df446fa5394"/>
+  <concept_name concept_name_id="441463" concept_id="463405" name="Other NGO" locale="en" locale_preferred="true" creator="1" date_created="2017-10-31 17:50:00.0" concept_name_type="FULLY_SPECIFIED" voided="false" uuid="22905cf9-3ca3-4192-b5a0-ab2fca50acca"/>
+  <concept_name concept_name_id="2291605" concept_id="1000000" name="Comment Refer Patient" locale="en" locale_preferred="true" creator="1" date_created="2018-10-01 14:46:04.0" concept_name_type="FULLY_SPECIFIED" voided="false" uuid="ed2bee5a-aca6-466c-9639-126cd3e5965b" changed_by="1"/>
+  <concept_name concept_name_id="7000011" concept_id="7000009" name="Referral Orders Set" locale="en" locale_preferred="true" creator="1" date_created="2018-11-22 11:39:41.0" concept_name_type="FULLY_SPECIFIED" voided="false" uuid="f0739ae5-a350-4d13-8e1d-2f39c576a667" changed_by="1"/>
   
+  <concept_set concept_set_id="6000133" concept_id="463402" concept_set="7000009" sort_weight="0.0" creator="1" date_created="2018-11-22 11:39:41.0" uuid="4516eb12-f85b-4cf3-9167-175223a0b87e"/>
+  <concept_set concept_set_id="6000136" concept_id="463405" concept_set="7000009" sort_weight="3.0" creator="1" date_created="2018-11-22 11:39:41.0" uuid="99f53bc8-3f1a-4730-80c4-5e83f104b1be"/>
+
   <concept_numeric concept_id="159368" low_absolute="1.0" allow_decimal="false"/>
   <concept_numeric concept_id="160856" low_absolute="1.0" allow_decimal="false"/>
   
@@ -94,6 +105,8 @@
 
   <encounter encounter_id="32" encounter_type="9" patient_id="7" location_id="6" form_id="9" encounter_datetime="2018-10-18 11:18:08.0" creator="1" date_created="2018-10-18 11:18:08.0" voided="false" visit_id="1" uuid="a131a0c9-e550-47da-a8d1-0eaa269cb3gh"/>
   <encounter encounter_id="33" encounter_type="9" patient_id="7" location_id="6" form_id="9" encounter_datetime="2018-10-18 11:18:08.0" creator="1" date_created="2018-10-18 11:18:08.0" voided="false" visit_id="1" uuid="a131a0c9-e550-47da-a8d1-0eaa269cb3g2"/>
+  <encounter encounter_id="39" encounter_type="9" patient_id="7" location_id="6" form_id="12" encounter_datetime="2018-11-22 15:33:28.0" creator="1" date_created="2018-11-22 15:34:01.0" voided="false" visit_id="1" uuid="22ac2d68-2ba0-4345-810f-cd44be3a3dad"/>
+  <encounter encounter_id="40" encounter_type="9" patient_id="7" location_id="6" form_id="12" encounter_datetime="2018-11-22 15:33:28.0" creator="1" date_created="2018-11-22 15:34:01.0" voided="false" visit_id="1" uuid="22ac2d68-2ba0-4345-810f-cd44be3a3da2"/>
 
   <order_frequency order_frequency_id="11" concept_id="160858" frequency_per_day="2.0" creator="1" date_created="2018-11-09 07:16:51.0" retired="false" uuid="160858OFAAAAAAAAAAAAAAA"/>
 
@@ -103,6 +116,7 @@
   <orders order_id="9" order_type_id="2" concept_id="1000021" orderer="1" encounter_id="32" date_activated="2018-11-09 11:04:09.0" auto_expire_date="2018-12-09 11:04:08.0" creator="1" date_created="2018-11-09 11:04:10.0" voided="false" patient_id="7" uuid="aa3d9f6c-6be9-4639-ba9d-12c9ea0aa9d3-1" urgency="ROUTINE" order_number="ORD-9" order_action="NEW" care_setting="1" />
   <orders order_id="10" order_type_id="2" concept_id="924" orderer="1" encounter_id="32" date_activated="2018-11-09 11:04:09.0" auto_expire_date="2018-12-09 11:04:08.0" creator="1" date_created="2018-11-09 11:04:10.0" voided="false" patient_id="7" uuid="aa3d9f6c-6be9-4639-ba9d-12c9ea0aa9d3-2" urgency="ROUTINE" order_number="ORD-10" order_action="NEW" care_setting="1" />
   <orders order_id="11" order_type_id="2" concept_id="924" orderer="1" encounter_id="33" date_activated="2018-11-09 11:04:09.0" auto_expire_date="2018-12-09 11:04:08.0" creator="1" date_created="2018-11-09 11:04:10.0" voided="false" patient_id="7" uuid="order-11" urgency="ROUTINE" order_number="ORD-11" order_action="NEW" care_setting="1" />
+  <orders order_id="12" order_type_id="4" concept_id="463402" orderer="1" encounter_id="40" date_activated="2018-11-26 07:10:31.0" creator="1" date_created="2018-11-26 07:10:31.0" voided="false" patient_id="8" uuid="837a2e6a-9479-4752-ac9c-d893f992a43d" urgency="ROUTINE" order_number="ORD-12" order_action="NEW" care_setting="1"/>
   <drug_order order_id="9" drug_inventory_id="36" dose="1.0" as_needed="false" dosing_type="org.openmrs.SimpleDosingInstructions" quantity="30.0" num_refills="0" duration="1" duration_units="1073" quantity_units="1073" route="160240" dose_units="1513" frequency="11" dispense_as_written="false" />
   <drug_order order_id="10" drug_inventory_id="2" dose="1.0" as_needed="false" dosing_type="org.openmrs.SimpleDosingInstructions" quantity="30.0" num_refills="0" duration="1" duration_units="1073" quantity_units="1073" route="160240" dose_units="1513" frequency="11" dispense_as_written="false" />
   <drug_order order_id="11" drug_inventory_id="2" dose="1.0" as_needed="false" dosing_type="org.openmrs.SimpleDosingInstructions" quantity="30.0" num_refills="0" duration="1" duration_units="1073" quantity_units="1073" route="160240" dose_units="1513" frequency="11" dispense_as_written="false" />
@@ -131,6 +145,12 @@
   <obs obs_id="306" person_id="7" concept_id="160855" encounter_id="33" obs_datetime="2018-11-09 07:17:44.0" location_id="6" obs_group_id="301" value_coded="160858" creator="1" date_created="2018-11-09 07:18:15.0" voided="false" uuid="obs-306" status="FINAL"/>
   <obs obs_id="307" person_id="7" concept_id="161244" encounter_id="33" obs_datetime="2018-11-09 07:17:44.0" location_id="6" obs_group_id="301" value_coded="1073" creator="1" date_created="2018-11-09 07:18:15.0" voided="false" uuid="obs-307" status="FINAL"/>
 
+  <obs obs_id="308" person_id="7" concept_id="463402" encounter_id="39" obs_datetime="2018-11-22 15:33:28.0" location_id="6" value_coded="1" creator="1" date_created="2018-11-22 15:34:01.0" voided="false" uuid="56aeee8a-4dca-401f-81d2-a6575e1cde3f" status="FINAL"/>
+  <obs obs_id="309" person_id="7" concept_id="463405" encounter_id="39" obs_datetime="2018-11-22 15:33:28.0" location_id="6" value_coded="1" creator="1" date_created="2018-11-22 15:34:01.0" voided="false" uuid="8e49c28a-54c1-4519-93c9-ff1e406ec1ba" status="FINAL"/>
+  <obs obs_id="310" person_id="7" concept_id="1000000" encounter_id="39" obs_datetime="2018-11-22 15:33:28.0" location_id="6" value_text="Comments for all referrals" creator="1" date_created="2018-11-22 15:34:01.0" voided="false" uuid="e1c377d0-bd85-40b6-b906-81033175ddf0" status="FINAL"/>
+
+  <obs obs_id="311" person_id="7" concept_id="463402" order_id="12" encounter_id="40" obs_datetime="2018-11-22 15:33:28.0" location_id="6" value_coded="1" creator="1" date_created="2018-11-22 15:34:01.0" voided="true" uuid="56aeee8a-4dca-401f-81d2-a6575e1cde3f2" status="FINAL"/>
+
   <provider provider_id="1" person_id="7" identifier="UNKNOWN" creator="1" date_created="2018-10-16 13:27:25.0" retired="false" uuid="f9badd80-ab76-11e2-9e96-0800200c9a66"/>
 
   <care_setting care_setting_id="1" name="Outpatient" description="Out-patient care setting" care_setting_type="OUTPATIENT" creator="1" date_created="2013-12-27 00:00:00.0" retired="false" uuid="6f0c9a92-6f24-11e3-af88-005056821db0"/>
@@ -139,8 +159,8 @@
 
   <encounter_provider encounter_provider_id="32" encounter_id="32" provider_id="1" encounter_role_id="1" creator="1" date_created="2018-10-18 11:18:08.0" voided="false" uuid="encounter-provider-32"/>
   <encounter_provider encounter_provider_id="33" encounter_id="33" provider_id="1" encounter_role_id="1" creator="1" date_created="2018-10-18 11:18:08.0" voided="false" uuid="encounter-provider-33"/>
-
-  <order_type order_type_id="2" name="Drug Order" description="An order for a medication to be given to the patient" creator="1" date_created="2010-05-12 00:00:00.0" retired="false" uuid="131168f4-15f5-102d-96e4-000c29c2a5d8" java_class_name="org.openmrs.DrugOrder"/>
+  <encounter_provider encounter_provider_id="39" encounter_id="39" provider_id="1" encounter_role_id="1" creator="1" date_created="2018-10-18 11:18:08.0" voided="false" uuid="encounter-provider-39"/>
+  <encounter_provider encounter_provider_id="40" encounter_id="40" provider_id="1" encounter_role_id="1" creator="1" date_created="2018-10-18 11:18:08.0" voided="false" uuid="encounter-provider-40"/>
 
   <test_order order_id="1"/>
   

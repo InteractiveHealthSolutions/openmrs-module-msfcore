@@ -18,11 +18,8 @@ public class ReferralFormAction implements FormAction {
 
     @Override
     public void apply(String operation, FormEntrySession session) {
-
-        String formUuid = session.getForm().getUuid();
-
-        if (VALID_FORM_UUIDS.contains(formUuid)) {
-            Context.getService(FormActionService.class).saveAllergies(session.getEncounter());
+        if (VALID_FORM_UUIDS.contains(session.getForm().getUuid())) {
+            Context.getService(FormActionService.class).saveReferralOrders(session.getEncounter());
         }
 
     }
