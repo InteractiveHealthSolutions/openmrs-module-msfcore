@@ -526,6 +526,12 @@ public class MSFCoreConfig {
 
     public static final String ENCOUNTER_TYPE_DISPENSE_DRUG_UUID = "0aa6553b-be5z-413a-93fr-23962bc594e0";
 
+    public static final String CHART_SEARCH_EXTENSION_ID = "chartsearch.chartSearchLink";
+
+    public static final String ADMIT_TO_INPATIENT_EXTENSION_ID = "referenceapplication.realTime.simpleAdmission";
+
+    public static final String VISIT_NOTE_EXTENSION_ID = "referenceapplication.realTime.simpleVisitNote";
+
     public static final String PERSON_ATTRIBUTE_OTHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd1";
 
     public static final String PERSON_ATTRIBUTE_AUNT_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd2";
@@ -539,4 +545,5 @@ public class MSFCoreConfig {
     public static final String PERSON_ATTRIBUTE_MOTHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd6";
 
     public static final String PERSON_ATTRIBUTE_FATHER_UUID = "0cd7e060-ec40-11e8-8eb2-f2801f1b9fd7";
+
 }
