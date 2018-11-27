@@ -664,51 +664,6 @@
   <concept_numeric concept_id="463538" low_absolute="0" allow_decimal="false" />
   <concept_numeric concept_id="463536" low_absolute="0" allow_decimal="false" />
 
-
-  <concept concept_id="463375" retired="0" datatype_id="10" class_id="4" is_set="0" creator="1" date_created="2017-10-31 17:49:28" changed_by="1" date_changed="2017-11-20 00:34:53" uuid="1446d5cf-659c-4d86-8f25-6108ec14cfa6"/>
-  <concept concept_id="463383" retired="0" datatype_id="10" class_id="4" is_set="0" creator="1" date_created="2017-10-31 17:49:36" changed_by="1" date_changed="2017-11-20 04:34:03" uuid="7f2132ba-fbd9-4a99-97d9-777052346211"/>
-  <concept concept_id="463385" retired="0" datatype_id="10" class_id="4" is_set="0" creator="1" date_created="2017-10-31 17:49:37" changed_by="1" date_changed="2017-11-20 04:37:17" uuid="772380f1-7716-4c9e-982b-f3faa0484d1e"/>
-  <concept concept_id="463441" retired="0" datatype_id="4" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:16:52" changed_by="1" date_changed="2017-10-31 18:16:52" uuid="44283db4-82a4-4fb5-8a97-93a0b4d9738a"/>
-  <concept concept_id="463442" retired="0" datatype_id="4" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:16:52" changed_by="1" date_changed="2017-10-31 18:16:52" uuid="1aa31cb4-bfe9-41f9-a4e3-98f558813f50"/>
-  <concept concept_id="463443" retired="0" datatype_id="4" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:16:53" changed_by="1" date_changed="2017-10-31 18:16:53" uuid="2a74d41c-cd4d-4778-951d-8daacdaacb40"/>
-  <concept concept_id="463444" retired="0" datatype_id="4" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:16:54" changed_by="1" date_changed="2017-10-31 18:16:54" uuid="fc37a765-7643-4ac3-a6c3-980d00ad4428"/>
-  <concept concept_id="463445" retired="0" datatype_id="4" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:16:55" changed_by="1" date_changed="2017-10-31 18:16:55" uuid="9f853291-8dc1-498c-90c2-0194a3417d78"/>
-  <concept concept_id="463446" retired="0" datatype_id="4" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:17:01" changed_by="1" date_changed="2017-10-31 18:17:01" uuid="b9f0e562-90b7-4fc0-95c1-4a591516dbde"/>
-  <concept concept_id="463447" retired="0" datatype_id="4" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:17:03" changed_by="1" date_changed="2017-10-31 18:17:03" uuid="b65e8494-0a6f-4e0b-a1c4-e1eff93e009d"/>
-  <concept concept_id="463448" retired="0" datatype_id="4" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:17:04" changed_by="1" date_changed="2017-10-31 18:17:04" uuid="bf8bf898-7239-4a6a-b1fd-8cdd0f550933"/>
-  <concept concept_id="463554" retired="0" datatype_id="2" class_id="4" is_set="0" creator="1" date_created="2017-10-31 18:20:19" changed_by="1" date_changed="2017-11-20 00:23:38" uuid="06ec3e5c-d0f0-436c-a466-e4be7c98701b"/>
-  <concept concept_id="463619" retired="0" datatype_id="2" class_id="4" is_set="0" creator="1" date_created="2017-12-01 21:31:16" changed_by="1" date_changed="2018-11-20 01:56:50" uuid="e30e2376-d82f-46e6-97c9-3576c127772f"/>
-
-  <concept_answer concept_answer_id="306948" concept_id="463619" answer_concept="120148" creator="1" date_created="2017-12-01 21:36:26" sort_weight="1" uuid="22d0868d-15c1-4a67-8e80-c7c67510dc2d"/>
-  <concept_answer concept_answer_id="306949" concept_id="463619" answer_concept="463375" creator="1" date_created="2017-12-01 21:36:26" sort_weight="15" uuid="113a8c66-8b1d-452b-af0f-35b1653a2c47"/>
-  <concept_answer concept_answer_id="306950" concept_id="463619" answer_concept="463442" creator="1" date_created="2017-12-01 21:36:26" sort_weight="13" uuid="77a416f7-9a0f-4323-9839-a3fdba7c5c77"/>
-  <concept_answer concept_answer_id="306951" concept_id="463619" answer_concept="463383" creator="1" date_created="2017-12-01 21:36:26" sort_weight="11" uuid="cd638a6e-356a-4216-b66f-bab291b17ae2"/>
-  <concept_answer concept_answer_id="306952" concept_id="463619" answer_concept="463441" creator="1" date_created="2017-12-01 21:36:26" sort_weight="12" uuid="8688d39b-8c01-448d-9789-419039b9608d"/>
-  <concept_answer concept_answer_id="306953" concept_id="463619" answer_concept="138291" creator="1" date_created="2017-12-01 21:36:26" sort_weight="10" uuid="29eefbd1-88e7-4666-99c6-94650552c6da"/>
-  <concept_answer concept_answer_id="306954" concept_id="463619" answer_concept="463385" creator="1" date_created="2017-12-01 21:36:26" sort_weight="21" uuid="8fb3abec-703f-4c38-b6ee-a3020027215e"/>
-  <concept_answer concept_answer_id="306955" concept_id="463619" answer_concept="463447" creator="1" date_created="2017-12-01 21:36:26" sort_weight="19" uuid="fe7d02ae-f3ce-4117-aa79-f79980fe20af"/>
-  <concept_answer concept_answer_id="306956" concept_id="463619" answer_concept="463554" creator="1" date_created="2017-12-01 21:36:26" sort_weight="9" uuid="ef6a0439-4a53-47b8-ba3d-68422e0b3067"/>
-  <concept_answer concept_answer_id="7000123" concept_id="463619" answer_concept="463443" creator="1" date_created="2018-11-20 01:38:15" sort_weight="14" uuid="fa32ec9b-4586-4171-9268-a78f26f1d833"/>
-  <concept_answer concept_answer_id="7000124" concept_id="463619" answer_concept="463444" creator="1" date_created="2018-11-20 01:41:15" sort_weight="16" uuid="0bf1bf52-351a-443d-ac80-1579f91c003e"/>
-  <concept_answer concept_answer_id="7000125" concept_id="463619" answer_concept="463445" creator="1" date_created="2018-11-20 01:43:26" sort_weight="17" uuid="dcf86e30-4b55-4ffb-a688-19747c9f1bb6"/>
-  <concept_answer concept_answer_id="7000126" concept_id="463619" answer_concept="463446" creator="1" date_created="2018-11-20 01:44:35" sort_weight="18" uuid="7ad7d844-bfa8-46e0-aced-47a637a972a9"/>
-  <concept_answer concept_answer_id="7000127" concept_id="463619" answer_concept="5622" creator="1" date_created="2018-11-20 01:48:53" sort_weight="22" uuid="ff7a9280-c705-4375-96d4-d3c8d8cc7995"/>
-  <concept_answer concept_answer_id="7000128" concept_id="463619" answer_concept="463448" creator="1" date_created="2018-11-20 01:56:50" sort_weight="20" uuid="602440bd-e157-465c-b8df-6cbdf26417ba"/>
-
-  <concept_name concept_name_id="441433" concept_id="463375" name="Angina" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 17:49:28" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="8c073fda-5e91-4149-8747-359b23bdcf60" />
-  <concept_name concept_name_id="441441" concept_id="463383" name="Heart failure" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 17:49:36" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="25feffb6-715d-487d-8fd4-235bf374bedb" />
-  <concept_name concept_name_id="441443" concept_id="463385" name="Retinopathy" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 17:49:37" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="66adb48a-ed48-4fa0-8140-1724873d9435" />
-  <concept_name concept_name_id="441499" concept_id="463441" name="Hypertensive emergencies" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:16:52" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="48a9c3ab-f5da-462f-ad8d-00e9ba652f95" />
-  <concept_name concept_name_id="441500" concept_id="463442" name="Heart Attack" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:16:52" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="a5f0c550-81ee-457e-ab35-65237d1f915e" />
-  <concept_name concept_name_id="441501" concept_id="463443" name="Intracerebral haemorrhage" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:16:53" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="b3f7f67e-d71b-4826-866c-ed7022c85a18" />
-  <concept_name concept_name_id="441502" concept_id="463444" name="Ischaemic stroke" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:16:54" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="2fe82676-0132-4242-ba26-c54ae1be97a9" />
-  <concept_name concept_name_id="441503" concept_id="463445" name="Ketoacidosis / coma hyperosmolar" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:16:55" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="06db0230-9fec-4f36-ba66-b5317825a405" />
-  <concept_name concept_name_id="441504" concept_id="463446" name="Chronic Renal Failure" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:17:01" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="3b4f6ea5-c3b6-4243-870f-13992627c4fe" />
-  <concept_name concept_name_id="441505" concept_id="463447" name="Neuropathy" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:17:03" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="8265acf1-316a-4c6e-aa01-843ed20bcd87" />
-  <concept_name concept_name_id="441506" concept_id="463448" name="Peripheral vascular disease" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:17:04" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="423cf912-cfe0-44ca-b5ed-90b18175125d" />
-  <concept_name concept_name_id="441612" concept_id="463554" name="COPD / Asthma" locale="en" locale_preferred="1" creator="1" date_created="2017-10-31 18:20:19" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="74d4225c-aae4-42ef-b8a4-2695e523e4a2" />
-  <concept_name concept_name_id="441678" concept_id="463619" name="Complications" locale="en" locale_preferred="1" creator="1" date_created="2017-12-01 21:31:16" concept_name_type="FULLY_SPECIFIED" voided="0" uuid="4ea012b1-d1a8-45c1-b547-ec954e14ffbe" />
-
   <!-- Synthesis on patient's condition Answers -->
   <concept_answer concept_answer_id="7000118" concept_id="463570" answer_concept="463521" creator="1" date_created="2018-11-01 11:11:27.0" sort_weight="1.0" uuid="3dcc91be-04b4-4225-a554-7cfcdf0d0db3"/>
   <concept_answer concept_answer_id="7000119" concept_id="463570" answer_concept="463522" creator="1" date_created="2018-11-01 11:11:27.0" sort_weight="2.0" uuid="0ed11cc8-0f8b-4b0d-a8be-9b989c611af2"/>
