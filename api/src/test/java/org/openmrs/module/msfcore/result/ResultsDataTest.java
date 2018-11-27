@@ -11,7 +11,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.Obs;
 import org.openmrs.Order;
@@ -473,7 +472,7 @@ public class ResultsDataTest extends BaseModuleContextSensitiveTest {
         Assert.assertEquals("c2299800-cca9-11e0-9572-0800200c9a66", created.get(1).getValueText());
     }
 
-    @Ignore
+    @Test
     public void updateReferralOrderRow_shouldUpdateExistingReferralValues() {
         executeReferralsDataSets();
 
