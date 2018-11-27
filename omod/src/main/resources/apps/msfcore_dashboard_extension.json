@@ -11,7 +11,7 @@
     "id":"mshforms.drugListHistory",
     "extensionPointId":"patientDashboard.overallActions",
     "type":"link",
-    "label":"msfcore.drugListHistory",
+    "label":"msfcore.dispenseDrugs",
     "url":"msfcore/resultHistory.page?patientId={{patient.patientId}}&category=drugList",
     "icon":"icon-medkit"
   },
