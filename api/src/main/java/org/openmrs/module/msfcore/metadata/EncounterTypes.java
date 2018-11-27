@@ -83,4 +83,20 @@ public class EncounterTypes {
             return MSFCoreConfig.ENCOUNTER_TYPE_DISPENSE_DRUG_UUID;
         }
     };
+
+    public static EncounterTypeDescriptor MSF_REFER_PATIENT_ENCOUNTER_TYPE = new EncounterTypeDescriptor() {
+        @Override
+        public String name() {
+            return "Refer Patient";
+        }
+
+        @Override
+        public String description() {
+            return "Patient referral's encounter type";
+        }
+
+        public String uuid() {
+            return MSFCoreConfig.ENCOUNTER_TYPE_REFER_PATIENT_UUID;
+        }
+    };
 }

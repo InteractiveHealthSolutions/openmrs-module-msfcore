@@ -24,4 +24,6 @@ public interface FormActionService extends OpenmrsService {
     void saveDrugOrders(Encounter encounter);
 
     Allergies saveAllergies(Encounter encounter);
+
+    void saveReferralOrders(Encounter encounter);
 }
