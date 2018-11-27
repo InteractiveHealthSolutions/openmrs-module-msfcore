@@ -17,7 +17,7 @@ public class ReportAuditLogAdvice implements AfterReturningAdvice {
     @Override
     public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
         try {
-            if (method.getName().toLowerCase().matches("runreport") && returnValue != null) {
+            if (method.getName().equalsIgnoreCase("runReport") && returnValue != null) {
                 ReportRequest reportRequest = ((Report) returnValue).getRequest();
                 Event event = Event.RUN_REPORT;
                 String initialMessage = Context.getMessageSourceService().getMessage("msfcore.runReport");
@@ -28,17 +28,7 @@ public class ReportAuditLogAdvice implements AfterReturningAdvice {
                 if (reportDefinition != null) {
                     sb.append(initialMessage + reportDefinition.getUuidOfMappedOpenmrsObject());
                     sb.append(" with Report request: " + reportRequest.getUuid());
-
-                    if (reportDefinition.getParameterizable() != null) {
-                        sb.append(" for " + reportDefinition.getParameterizable().getName());
-                        sb.append(" with " + reportDefinition.getParameterizable());
-                    }
-
-                    if (reportRequest.getRenderingMode() != null && reportRequest.getRenderingMode().getRenderer() != null) {
-                        sb.append(" output to " + reportRequest.getRenderingMode().getRenderer().getClass().getSimpleName());
-                    }
-
-                    sb.append(" with status: " + reportRequest.getStatus());
+                    sb.append(" and status: " + reportRequest.getStatus());
 
                     AuditLog reportLog = AuditLog.builder().event(event).detail(sb.toString()).user(reportRequest.getRequestedBy()).build();
 

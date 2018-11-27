@@ -14,8 +14,7 @@ import org.openmrs.module.reporting.report.util.ReportUtil;
 import org.springframework.stereotype.Component;
 
 /**
- * Number of unique patients per diagnosis by gender report, auto installed in
- * MSFCoreActivator
+ * List of patients scheduled for appointments in given date range at specific location
  */
 @Component
 public class ScheduledAppointmentsReport extends BaseMSFReportManager {
@@ -23,10 +22,6 @@ public class ScheduledAppointmentsReport extends BaseMSFReportManager {
     @Override
     public String getName() {
         return Context.getMessageSourceService().getMessage("msfcore.reports.scheduledAppointments");
-    }
-
-    public String getDatasetName(ReportDefinition definition) {
-        return definition.getName().toLowerCase().replace(" ", "_");
     }
 
     @Override
@@ -37,11 +32,6 @@ public class ScheduledAppointmentsReport extends BaseMSFReportManager {
     @Override
     public String getDescription() {
         return Context.getMessageSourceService().getMessage("msfcore.reports.scheduledAppointments.description");
-    }
-
-    @Override
-    public String getVersion() {
-        return "1.0-SNAPSHOT";// remove '-SNAPSHOT' to release
     }
 
     @Override
@@ -74,8 +64,8 @@ public class ScheduledAppointmentsReport extends BaseMSFReportManager {
     @Override
     public List<ReportDesign> constructReportDesigns(ReportDefinition reportDefinition) {
         List<ReportDesign> l = new ArrayList<ReportDesign>();
-        ReportDesign design = ReportManagerUtil.createExcelTemplateDesign("be2118d8-c8f1-4948-ae65-ec63237e6a95", 
-        		reportDefinition, "excel_template_appointments.xls");
+        ReportDesign design = ReportManagerUtil.createExcelTemplateDesign("be2118d8-c8f1-4948-ae65-ec63237e6a95", reportDefinition,
+                        "excel_template_appointments.xls");
         design.addPropertyValue("repeatingSections", "sheet:1,row:6,dataset:" + getDatasetName(reportDefinition));
         design.setName("excel_template_appointments");
         l.add(design);
