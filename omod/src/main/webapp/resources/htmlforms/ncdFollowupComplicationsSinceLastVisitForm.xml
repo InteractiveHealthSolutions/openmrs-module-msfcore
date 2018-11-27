@@ -74,7 +74,7 @@
 
 					<table class="baseline-aligned">
 						<tr>
-							<td width="30%"><obs conceptId="463619" answerConceptId="120148" answerLabel="Arrhythmia" style="checkbox" /></td>
+							<td width="30%"><obs conceptId="463619" answerConceptId="120148" answerLabel="Arrhythmias" style="checkbox" /></td>
 							<td width="30%"><obs conceptId="463619" answerConceptId="463554" answerLabel="COPD/Asthma exacerbation" style="checkbox" /></td>
 							<td width="30%"><obs conceptId="463619" answerConceptId="138291" answerLabel="Episodes of hyperglycaemia" style="checkbox" /></td>
 						</tr>
