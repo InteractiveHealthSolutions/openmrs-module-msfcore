@@ -1,10 +1,24 @@
 /**
- * Print html from entire page ignoring some elements
+ * Print html from entire page hiding and/or showing some elements
  */
-function printPageWithIgnore(elements) {
-    jQuery(elements).hide();
+function printPageWithIgnoreInclude(elementsToIgnore, elementsToInclude) {
+	hideElements(elementsToIgnore);
+	showElements(elementsToInclude);
     window.print();
-    jQuery(elements).show();
+    showElements(elementsToIgnore);
+    hideElements(elementsToInclude);
+}
+
+function hideElements(elements) {
+	if(elements) {
+		jQuery(elements).hide();
+	}
+}
+
+function showElements(elements) {
+	if(elements) {
+		jQuery(elements).show();
+	}
 }
 
 /**

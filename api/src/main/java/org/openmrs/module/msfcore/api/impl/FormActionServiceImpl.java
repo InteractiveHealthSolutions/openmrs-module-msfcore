@@ -10,8 +10,6 @@
 package org.openmrs.module.msfcore.api.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,30 +66,29 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
     @Override
     public void saveTestOrders(Encounter encounter) {
         OrderService orderService = Context.getOrderService();
-        EncounterService encounterService = Context.getEncounterService();
         OrderType orderType = orderService.getOrderTypeByUuid(OrderType.TEST_ORDER_TYPE_UUID);
         Provider provider = encounter.getEncounterProviders().iterator().next().getProvider();
         CareSetting careSetting = orderService.getCareSettingByName(CareSetting.CareSettingType.OUTPATIENT.name());
-        List<Obs> allObs = new ArrayList<Obs>(encounter.getAllObs(true));
 
-        List<Order> orders = encounter.getOrders().stream().filter(o -> !o.getVoided()).collect(Collectors.toList());
         Concept labOrdersSetConcept = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_SET_LAB_ORDERS_UUID);
+        List<Obs> labOrderObs = encounter.getObsAtTopLevel(true).stream()
+                        .filter(o -> labOrdersSetConcept.getSetMembers().contains(o.getConcept())).collect(Collectors.toList());
 
-        for (Obs obs : allObs) {
-            // check for test order observations only (excludes results)
-            if (labOrdersSetConcept.getSetMembers().contains(obs.getConcept())) {
-                Optional<Order> existingOrder = getExistingOrder(orders, obs);
-                boolean mustInactivate = existingOrder.isPresent() && !isOrderFulfilled(existingOrder.get()) && obs.getVoided();
-                boolean mustCreate = !existingOrder.isPresent() && !obs.getVoided();
-                if (mustInactivate) {
-                    orderService.voidOrder(existingOrder.get(), ORDER_VOID_REASON);
-                } else if (mustCreate) {
-                    TestOrder order = createTestOrder(encounter, orderType, provider, careSetting, obs.getConcept());
-                    orderService.saveOrder(order, null);
-                }
+        for (Obs obs : labOrderObs) {
+            Order existingOrder = obs.getOrder();
+            if (existingOrder == null && !obs.getVoided()) {
+                Concept concept = obs.getConcept();
+                TestOrder order = createTestOrder(encounter, orderType, provider, careSetting, concept);
+                orderService.saveOrder(order, null);
+                Obs newObs = Obs.newInstance(obs);
+                newObs.setOrder(order);
+                obs.setVoided(true);
+                encounter.addObs(newObs);
+            } else if (existingOrder != null && obs.getVoided() && !isTestOrderFulfilled(existingOrder)) {
+                orderService.voidOrder(existingOrder, ORDER_VOID_REASON);
             }
         }
-        encounterService.saveEncounter(encounter);
+        Context.getEncounterService().saveEncounter(encounter);
     }
     @Override
     public void saveDrugOrders(Encounter encounter) {
@@ -153,13 +150,16 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         }
         encounterService.saveEncounter(encounter);
     }
-    private Optional<Order> getExistingOrder(Collection<Order> orders, Obs obs) {
-        return orders.stream().filter(o -> o.getConcept().equals(obs.getConcept())).findAny();
+    private boolean isTestOrderFulfilled(Order order) {
+        if (order != null) {
+            Optional<Obs> result = dao
+                            .getObservationsByOrderAndConcept(order, null).stream().filter(o -> !o.getVoided() && o.getEncounter()
+                                            .getEncounterType().getUuid().equals(MSFCoreConfig.ENCOUNTER_TYPE_LAB_RESULTS_UUID))
+                            .findFirst();
+            return result.isPresent();
+        }
+        return false;
     }
-    private boolean isOrderFulfilled(Order order) {
-        return dao.getObservationsByOrderAndConcept(order, null).size() > 0;
-    }
-
     private boolean isDrugOrderDispensed(Order order) {
         if (order != null) {
             Concept dispensedConcept = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_DISPENSED);

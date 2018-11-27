@@ -141,5 +141,12 @@
 			<where>property='concept.labResults'</where>
 		</update>
 	</changeSet>
+	
+	<changeSet author="guimino" id="20181126-1005">
+		<update tableName="global_property">
+			<column name="property_value" value="5000022,5000023,5000024,5000025,5000026,5000027,5000028,5000029,5000030,5000031,5000032,5000033,5000035,463591,463593,465099"/>
+			<where>property='concept.labResults'</where>
+		</update>
+	</changeSet>
 
 </databaseChangeLog>

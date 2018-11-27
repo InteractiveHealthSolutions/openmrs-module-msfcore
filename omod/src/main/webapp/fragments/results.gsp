@@ -6,7 +6,7 @@
 <script type="text/javascript">
     jQuery(function() {
     	jQuery("#print-results").click(function(e) {
-    		printPageWithIgnore(".print-ignore");
+    		printPageWithIgnoreInclude(".print-ignore", ".print-include");
     	});
 	});
 </script>

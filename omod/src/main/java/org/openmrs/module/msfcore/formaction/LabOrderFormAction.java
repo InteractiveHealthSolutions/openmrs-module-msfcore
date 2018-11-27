@@ -18,7 +18,7 @@ public class LabOrderFormAction implements FormAction {
     @Override
     public void apply(String operation, FormEntrySession session) {
 
-        boolean isRequestInvestigationForm = Arrays.asList(MSFCoreConfig.HTMLFORM_REQUEST_INVESTIGATION_UUID,
+        boolean isRequestInvestigationForm = Arrays.asList(MSFCoreConfig.FORM_NCD_BASELINE_REQUEST_INVESTIGATION_UUID,
                         MSFCoreConfig.FORM_NCD_FOLLOWUP_REQUEST_INVESTIGATION_UUID).contains(session.getForm().getUuid());
 
         if (isRequestInvestigationForm) {
