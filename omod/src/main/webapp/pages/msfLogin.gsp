@@ -14,18 +14,14 @@
     <!-- /MSF: customize favicon -->
     
 	${ ui.resourceLinks() }
+    <!-- MSF: We may override the header or else just style it here -->
+    <link href="${ui.resourceLink('msfcore', 'styles/msf.css')}" rel="stylesheet" type="text/css" media="all">
+    <!-- /MSF: We may override the header or else just style it here -->
 </head>
 <body>
 <script type="text/javascript">
     var OPENMRS_CONTEXT_PATH = '${ ui.contextPath() }';
 </script>
-
-<!-- MSF: We may override the header or else just style it here -->
-<link href="${ui.resourceLink('msfcore', 'styles/msf.css')}" rel="stylesheet" type="text/css" media="all">
-<!-- /MSF: We may override the header or else just style it here -->
-
-
-${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
 
 <script type="text/javascript">
     jQuery(function() {
@@ -81,14 +77,16 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
 
 <div id="body-wrapper">
     <div id="content">
+
         <form id="login-form" method="post" autocomplete="off">
             <fieldset>
-
                 <legend>
                     <i class="icon-lock small"></i>
                     ${ ui.message("referenceapplication.login.loginHeading") }
                 </legend>
-				<br/><br/><br/>
+
+                ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
+
                 <p class="left">
                     <label for="username">
                         ${ ui.message("referenceapplication.login.username") }:
@@ -117,7 +115,6 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
                 <input type="hidden" id="sessionLocationInput" name="sessionLocation"
                     <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
 
-                <p></p>
                 <p>
                     <input id="loginButton" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
                 </p>

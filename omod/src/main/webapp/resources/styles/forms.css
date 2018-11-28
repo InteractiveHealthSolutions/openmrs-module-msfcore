@@ -445,16 +445,10 @@ input.error {
 
 /* Login Form Error */
 
-link ~ #error-message {   
+form[id="login-form"] #error-message {
     background: #FEE8E8;
-    box-shadow: rgba(0,0,0,0.3) 0 4px 8px;
-    color:#fb0303;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    position: absolute;
+    color: #fb0303;
+    margin: 0 0 24px -22px;
+    padding: 8px 16px 24px 16px;
     text-align: center;
-    top: 90px;
-    padding: 16px;
 }
