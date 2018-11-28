@@ -31,6 +31,7 @@ import org.openmrs.OrderType;
 import org.openmrs.Provider;
 import org.openmrs.TestOrder;
 import org.openmrs.api.EncounterService;
+import org.openmrs.api.OrderContext;
 import org.openmrs.api.OrderService;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
@@ -44,6 +45,13 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
     private static final String ORDER_VOID_REASON = "Obs was voided";
 
     private MSFCoreDao dao;
+
+    /**
+     * Injected in moduleApplicationContext.xml
+     */
+    public void setDao(MSFCoreDao dao) {
+        this.dao = dao;
+    }
 
     @SuppressWarnings("serial")
     private static final Map<String, Integer> DURATION_UNIT_CONCEPT_UUID_TO_NUMBER_OF_DAYS = new HashMap<String, Integer>() {
@@ -113,6 +121,35 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         }
         encounterService.saveEncounter(encounter);
     }
+    @Override
+    public void saveReferralOrders(Encounter encounter) {
+        OrderService orderService = Context.getOrderService();
+        EncounterService encounterService = Context.getEncounterService();
+        OrderType orderType = orderService.getOrderTypeByUuid(MSFCoreConfig.REFERRAL_ORDER_TYPE_UUID);
+        Provider provider = encounter.getEncounterProviders().iterator().next().getProvider();
+        CareSetting careSetting = orderService.getCareSettingByName(CareSetting.CareSettingType.OUTPATIENT.name());
+        OrderContext orderContext = new OrderContext();
+        orderContext.setOrderType(orderType);
+        Concept referralsSet = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_SET_REFERRAL_ORDERS_UUID);
+        List<Obs> observations = encounter.getAllObs(true).stream().filter(o -> referralsSet.getSetMembers().contains(o.getConcept()))
+                        .collect(Collectors.toList());
+        Optional<Obs> reasonForReferral = encounter.getAllObs(false).stream()
+                        .filter(o -> o.getConcept().getUuid().equals(MSFCoreConfig.CONCEPT_REASON_FOR_REFERRAL_UUID)).findAny();
+        for (Obs obs : observations) {
+            if (!obs.getVoided() && obs.getOrder() == null) {
+                Concept concept = obs.getConcept();
+                Order order = createReferralOrder(encounter, provider, careSetting, concept, reasonForReferral);
+                orderService.saveOrder(order, orderContext);
+                Obs newObs = Obs.newInstance(obs);
+                newObs.setOrder(order);
+                obs.setVoided(true);
+                encounter.addObs(newObs);
+            } else if (obs.getVoided() && obs.getOrder() != null && !obs.getOrder().getVoided()) {
+                orderService.voidOrder(obs.getOrder(), ORDER_VOID_REASON);
+            }
+        }
+        encounterService.saveEncounter(encounter);
+    }
     private boolean isTestOrderFulfilled(Order order) {
         if (order != null) {
             Optional<Obs> result = dao
@@ -123,7 +160,6 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         }
         return false;
     }
-
     private boolean isDrugOrderDispensed(Order order) {
         if (order != null) {
             Concept dispensedConcept = Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_DISPENSED);
@@ -136,8 +172,7 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         return false;
     }
 
-    private TestOrder createTestOrder(Encounter encounter, OrderType orderType, Provider provider, CareSetting careSetting,
-                    Concept concept) {
+    private TestOrder createTestOrder(Encounter encounter, OrderType orderType, Provider provider, CareSetting careSetting, Concept concept) {
         TestOrder order = new TestOrder();
         order.setOrderType(orderType);
         order.setConcept(concept);
@@ -145,6 +180,21 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
         order.setEncounter(encounter);
         order.setOrderer(provider);
         order.setCareSetting(careSetting);
+        encounter.addOrder(order);
+        return order;
+    }
+
+    private Order createReferralOrder(Encounter encounter, Provider provider, CareSetting careSetting, Concept concept,
+                    Optional<Obs> reasonForReferral) {
+        Order order = new Order();
+        order.setConcept(concept);
+        order.setPatient(encounter.getPatient());
+        order.setEncounter(encounter);
+        order.setOrderer(provider);
+        order.setCareSetting(careSetting);
+        if (reasonForReferral.isPresent()) {
+            order.setOrderReasonNonCoded(reasonForReferral.get().getValueText());
+        }
         encounter.addOrder(order);
         return order;
     }
@@ -158,10 +208,9 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
     private boolean isOrderModified(DrugOrder order, Order currentOrder) {
         if (currentOrder != null) {
             DrugOrder other = dao.getDrugOrder(currentOrder.getId());
-            boolean equals = new EqualsBuilder().append(order.getDrug().getId(), other.getDrug().getId())
-                            .append(order.getDose(), other.getDose()).append(order.getDoseUnits().getId(), other.getDoseUnits().getId())
-                            .append(order.getFrequency().getId(), other.getFrequency().getId())
-                            .append(order.getDuration(), other.getDuration())
+            boolean equals = new EqualsBuilder().append(order.getDrug().getId(), other.getDrug().getId()).append(order.getDose(),
+                            other.getDose()).append(order.getDoseUnits().getId(), other.getDoseUnits().getId()).append(
+                            order.getFrequency().getId(), other.getFrequency().getId()).append(order.getDuration(), other.getDuration())
                             .append(order.getDurationUnits().getId(), other.getDurationUnits().getId()).isEquals();
             return !equals;
         }
@@ -243,11 +292,4 @@ public class FormActionServiceImpl extends BaseOpenmrsService implements FormAct
     private Optional<Obs> getObservationByConceptUuid(String conceptUuid, Set<Obs> observations) {
         return observations.stream().filter(o -> o.getConcept().getUuid().equals(conceptUuid)).findAny();
     }
-    /**
-     * Injected in moduleApplicationContext.xml
-     */
-    public void setDao(MSFCoreDao dao) {
-        this.dao = dao;
-    }
-
 }

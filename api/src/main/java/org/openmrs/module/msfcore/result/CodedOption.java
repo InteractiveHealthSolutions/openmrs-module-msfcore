@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Default wise this class replasents the openmrs understanding of a
+ * coded/concept value but we also use it for any options of an openmrs object
+ */
 public class CodedOption {
     private String name;
     private String uuid;
