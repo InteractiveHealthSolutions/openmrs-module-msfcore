@@ -67,7 +67,7 @@ public class ScheduledAppointmentsReport extends BaseMSFReportManager {
         ReportDesign design = ReportManagerUtil.createExcelTemplateDesign("be2118d8-c8f1-4948-ae65-ec63237e6a95", reportDefinition,
                         "excel_template_appointments.xls");
         design.addPropertyValue("repeatingSections", "sheet:1,row:6,dataset:" + getDatasetName(reportDefinition));
-        design.setName("excel_template_appointments");
+        design.setName(Context.getMessageSourceService().getMessage("msfcore.reports.scheduledAppointments.exceltemplate"));
         l.add(design);
         return l;
     }
