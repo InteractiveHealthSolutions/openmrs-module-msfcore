@@ -15,7 +15,7 @@
     
 	${ ui.resourceLinks() }
     <!-- MSF: We may override the header or else just style it here -->
-    <link href="${ui.resourceLink('msfcore', 'styles/msf.css')}" rel="stylesheet" type="text/css" media="all">
+        <link href="${ui.resourceLink('msfcore', 'styles/msf.css')}" rel="stylesheet" type="text/css" media="all">
     <!-- /MSF: We may override the header or else just style it here -->
 </head>
 <body>

@@ -32,6 +32,11 @@ White: FFFFFF
     Darker:
 */
 
+.bg-teal-light {
+    background: #A2E8DB;
+}
+
+
 /* STRUCTURE */
 
 html {
@@ -77,6 +82,7 @@ header .logo {
 
 /* Containers for forms and page elements */
 
+.content-box,
 h2 + div#filters,
 htmlform[formname="Discharge (Simple)"],
 htmlform[formname="Admission (Simple)"],
@@ -97,6 +103,8 @@ table#active-visits + input + input + div,
 /* Standard Drop Shadow */
 /* Merge Visits */
 
+.content-box,
+.drop-shadow-mid,
 h2 + div#filters,
 htmlform[formname="Discharge (Simple)"],
 htmlform[formname="Admission (Simple)"],
@@ -110,6 +118,10 @@ table#active-visits + input + input + div,
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 8px;
 }
 
+.drop-shadow-close {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px;
+}
+
 /* All four rounded corners */
 #appointment-block-form,
 .create-appointment-type {
@@ -118,6 +130,8 @@ table#active-visits + input + input + div,
 
 /* Bottom Rounded Corners for these boxes */
 
+.content-box,
+.bottom-rounded,
 h2 + div#filters,
 htmlform[formname="Discharge (Simple)"],
 htmlform[formname="Admission (Simple)"],
@@ -216,8 +230,12 @@ a.visited {
 }
 
 .flex-row {
-    flex-direction: row !important;
     margin: 24px 0;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 .flex-col {
@@ -228,10 +246,64 @@ a.visited {
     margin-right: 24px;
 }
 
+.disabled {
+	color: #acacac;
+}
+
+.text-center {
+	text-align:center;
+}
+
+.center {
+    display:inline-block;
+}
+
 /* Spacers */
 
+.margin-t-0 {
+    margin-top: 0;
+}
+.margin-b-0 {
+    margin-bottom: 0;
+}
+.margin-y-0 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.margin-t-20 {
+    margin-top: 1.25rem;
+}
+
+.margin-r-8 {
+    margin-right: 0.333rem !important;
+}
+
 .margin-r-24 {
-    margin-right: 24px;
+    margin-right: 1.5rem;
+}
+
+.margin-b-0 {
+    margin-bottom: 0;
+}
+.margin-b-8 {
+    margin-bottom: 0.5rem;
+}
+.margin-b-16 {
+    margin-bottom: 1rem;
+}
+
+.pad-y-16 {
+    padding:1rem;
+}
+
+.pad-x-24 {
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+}
+
+.pad-t-24 {
+    padding-top:1.5rem;
 }
 
 /* TOASTS */
@@ -538,18 +610,6 @@ div#appointmentscheduling-manageAppointments>div {
     box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px;
 }
 
-#filter-date {
-    padding-left: 24px;
-    padding-right: 0px;
-}
-
-#filter-date input {
-    height: 40px;
-    box-sizing: border-box;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
 /*
 .appointment-filter input,
 .appointment-filter select {
@@ -645,12 +705,14 @@ table td:last-child {
 
 /* Pagination */
 
+.pagination,
 .ngFooterPanel {
     color:#fff;
-    background: #373F46;
+    background: #424C55;
     font-size: 0.9em;
     padding: 0.5rem 0;
 }
+
 
 .ngFooterTotalItems {
     padding: 8px;
@@ -764,4 +826,50 @@ span#start-time {
     width: 32%;
     display: block;
     float: left;
+}
+
+/* LAB RESULTS / DRUG ORDERS */
+
+/* style CANCELLED & PENDING here */
+.column-status {
+	background-color: #acacac;
+}
+
+.icon-edit, .icon-ok, .icon-trash, .page, .actionable {
+	cursor:pointer;
+}
+
+/* style current page highlighting here */
+
+div#results-data table {
+    box-shadow: none;
+    border: 2px solid #3E9C8B;
+}
+
+div[id*="filter-"],
+div#filter-status {
+    background: #A2E8DB;
+    padding: 16px;
+    margin:0;
+}
+/*
+div#filter-name {
+    background: #55D6BE;
+    color:#fff;
+}
+div#filter-status {
+    background: #83E1CF;
+}
+div#filter-date {
+    background: #A2E8DB;
+}*/
+
+.current-page {
+	background-color: #acacac;
+}
+
+/* style editing fields here */
+
+td.no-wrap {
+	white-space: nowrap;
 }
