@@ -31,11 +31,17 @@ Dark grey: 424C55
 White: FFFFFF
     Darker:
 */
+.white {
+    color:#fff;
+}
 
 .bg-teal-light {
     background: #A2E8DB;
 }
 
+.bdr-btm-light {
+    border-bottom: 1px solid #eee;
+}
 
 /* STRUCTURE */
 
@@ -139,6 +145,10 @@ table#active-visits + input + input + div,
 .scheduleAppointment,
 .patient-header+#edit-patient-identifier-dialog+h3+#mark-patient-dead {
     border-radius: 0 0 8px 8px;
+}
+
+.top-rounded {
+    border-radius: 8px 8px 0 0;
 }
 
 div#simplemodal-container {
@@ -248,6 +258,10 @@ a.visited {
 .flex-space-btwn {
     justify-content: space-between;
 }
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
 
 .disabled {
 	color: #acacac;
@@ -269,6 +283,12 @@ a.visited {
 
 .margin-t-0 {
     margin-top: 0;
+}
+.margin-t-16 {
+    margin-top: 1rem;
+}
+.margin-t-32 {
+    margin-top: 2rem;
 }
 .margin-b-0 {
     margin-bottom: 0;

@@ -170,7 +170,7 @@ a.button.cancel:hover,
     background: #ff4747;
 }
 
-
+button:hover,
 .main-content .visit-actions a:hover,
 .main-content .spaced a:hover,
 .button.confirm:hover,
@@ -242,7 +242,7 @@ input[type="submit"]:disabled:hover {
     opacity: 1;
 }
 
-.button-small, .page, .actionable,
+.btn-small, .page, .actionable,
 #encountersList .encounter-details li:last-child > .details-action a,
 #deleteVisitLink, #editVisitDatesLink, #editVisitLink,
 .edit-info,
@@ -269,11 +269,15 @@ a.view-details {
     text-decoration: none;
 }
 
-.button-small {
+.btn-small {
     font-size: 0.75rem;
 }
-.button-small i {
+.btn-small i {
     font-size: 1rem;
+}
+
+.btn-block {
+    width:100%;
 }
 
 #viewAllAppointmentTypes a,
@@ -306,7 +310,7 @@ Causes an issue on Manage Service Types
 .delete-item:first-of-type {
     margin-right: 0;
 }*/
-.button-small
+.btn-small
 .view-action.icon-file-alt::after,
 #patient-search-clear-button::after,
 .icon-pencil.edit-action::after,

@@ -350,13 +350,17 @@ form input[type=radio] + label,
 }
 
 #login-form ul.select, #login-form #sessionLocation {
-    width: 95%;
+    width: 100%;
     padding: 16px;
     box-sizing: border-box;
+    box-shadow: none;
+    border: none;
+    background: #E0F7F3;
+    margin-right: 0px;
 }
 
 form#login-form {
-    width: 40%;
+    width: 34%;
     margin: 9rem auto;
     background: #fff;
     border-radius: 8px;
@@ -364,13 +368,11 @@ form#login-form {
 }
 
 ul.select li {
-    width: 43%;
+    width: 40%;
     padding: 8px;
     color: #4EC3AD;
-    border: 1px solid #ccc;
-    border-radius:4px;
-    box-shadow: rgba(0,0,0,0.1) 0 0 1px;
-    margin:4px;
+    border-radius: 4px;
+    margin: 8px;
 }
 
 ul.select li:hover {
@@ -386,31 +388,19 @@ ul.select li.selected {
 
 form#login-form fieldset {
     border: none;
+    padding:0;
 }
 
-form#login-form fieldset legend {
-    padding: 16px;
-    color: #fff;
-    font-size: 2rem;
-    text-align: center;
+.form-header {
     background: #424C55;
-    width: 105%;
     box-sizing: border-box;
     padding: 24px;
-    margin: -20px 0 32px -22px;
-    float: left;
-    border-radius: 8px 8px 0 0;
 }
 
 #login-form p input[type=submit] {
     width: 100%;
     float: left;
     margin: 16px 22%;
-}
-
-#cantLogin {
-    float: left;
-    margin: 16px 36%;
 }
 
 /* Add New Allergies */

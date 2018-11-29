@@ -78,52 +78,50 @@
 <div id="body-wrapper">
     <div id="content">
 
-        <form id="login-form" method="post" autocomplete="off">
-            <fieldset>
-                <legend>
-                    <i class="icon-lock small"></i>
-                    ${ ui.message("referenceapplication.login.loginHeading") }
-                </legend>
+        <form id="login-form" class="content-box" method="post" autocomplete="off">
+            <div class="flex-row flex-center bdr-btm-light margin-t-0 margin-b-32">
+                <i class="icon-lock txt-size-3x margin-r-8"></i>
+                <h1>${ ui.message("referenceapplication.login.loginHeading") }</h1>
+            </div>
 
+            <fieldset class="flex-col">
                 ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
 
-                <p class="left">
+                <div class="flex-col margin-b-16">
                     <label for="username">
                         ${ ui.message("referenceapplication.login.username") }:
                     </label>
                     <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
-                </p>
+                </div>
 
-                <p class="left">
+                <div class="flex-col margin-b-16">
                     <label for="password">
                         ${ ui.message("referenceapplication.login.password") }:
                     </label>
                     <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
-                </p>
+                </div>
 
-                <p class="clear">
-                    <label for="sessionLocation">
-                        ${ ui.message("referenceapplication.login.sessionLocation") }: <span class="location-error" id="sessionLocationError" style="display: none">${ui.message("referenceapplication.login.error.locationRequired")}</span>
-                    </label>
-                    <ul id="sessionLocation" class="select">
-                        <% locations.sort { ui.format(it) }.each { %>
-                        <li id="${it.name}" value="${it.id}">${ui.format(it)}</li>
-                        <% } %>
-                    </ul>
-                </p>
+                <label for="sessionLocation">
+                    ${ ui.message("referenceapplication.login.sessionLocation") }: <span class="location-error" id="sessionLocationError" style="display: none">${ui.message("referenceapplication.login.error.locationRequired")}</span>
+                </label>
+                <ul id="sessionLocation" class="select">
+                    <% locations.sort { ui.format(it) }.each { %>
+                    <li id="${it.name}" value="${it.id}">${ui.format(it)}</li>
+                    <% } %>
+                </ul>
 
                 <input type="hidden" id="sessionLocationInput" name="sessionLocation"
                     <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
 
-                <p>
-                    <input id="loginButton" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
-                </p>
-                <p>
-                    <a id="cantLogin" href="javascript:void(0)">
+                <div class="margin-t-32 text-center">
+                    <button class="btn-block" type="submit">${ ui.message("referenceapplication.login.button") }</button>
+                </div>
+                <div class="text-center">
+                    <a href="javascript:void(0)">
                         <i class="icon-question-sign small"></i>
                         ${ ui.message("referenceapplication.login.cannotLogin") }
                     </a>
-                </p>
+                </div>
 
             </fieldset>
 
