@@ -558,4 +558,12 @@ public class MSFCoreConfig {
 
     public static final String ENCOUNTER_TYPE_REFER_PATIENT_UUID = "0aa6553b-be5z-444a-93fr-23962bc594e1";
 
+    public static final String CONCEPT_ABLE_TO_WRITE_UUID = "34cebc3e-882f-47b1-aac4-32304f571591";
+
+    public static final String CONCEPT_ABLE_TO_READ_UUID = "159400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+    public static final String PERSON_ATTRIBUTE_ABLE_TO_READ_UUID = "ebb49035-b40b-4659-a1c6-0cb3ceade639";
+
+    public static final String PERSON_ATTRIBUTE_ABLE_TO_WRITE_UUID = "ccf9a5cf-c6ff-456c-b8f3-3cf3f02b4150";
+
 }

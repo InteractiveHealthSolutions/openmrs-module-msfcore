@@ -821,9 +821,19 @@
   <!-- referral orders concepts start -->
   <concept concept_id="5000042" retired="0" datatype_id="3" class_id="11" is_set="0" creator="1" date_created="2018-11-23 13:36:22" changed_by="1" date_changed="2018-11-23 13:36:22" uuid="5000042AAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
   <concept concept_id="5000043" retired="0" datatype_id="3" class_id="11" is_set="0" creator="1" date_created="2018-11-23 13:36:22" changed_by="1" date_changed="2018-11-23 13:36:22" uuid="5000043AAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
-  
+
   <concept_name concept_name_id="5000042" concept_id="5000042" voided="0" name="Feedback" locale="en" locale_preferred="1" creator="1" date_created="2018-11-23 13:49:46" concept_name_type="FULLY_SPECIFIED" uuid="5000042BBBBBBBBBBBBBBBBBBBBBBBBBBBBB" />
   <concept_name concept_name_id="5000043" concept_id="5000043" voided="0" name="Feedback from" locale="en" locale_preferred="1" creator="1" date_created="2018-11-23 13:49:46" concept_name_type="FULLY_SPECIFIED" uuid="5000043BBBBBBBBBBBBBBBBBBBBBBBBBBBBB" />
   <!-- referral orders concepts ends -->
-  
+
+  <!-- Education on the Lifestyle seciton of the registration page  -->
+  <concept concept_id="5000050" retired="0" datatype_id="2" class_id="5" is_set="0" creator="1" date_created="2010-08-25 13:53:04" version="" changed_by="1" uuid="34cebc3e-882f-47b1-aac4-32304f571591"/>
+
+  <concept_name concept_id="5000050" name="Able to write" locale="en" creator="1" date_created="2010-08-25 13:55:31" concept_name_id="7000500" voided="0" voided_by="1"  uuid="8cd8b437-2df6-4563-b26e-7919cca35905" concept_name_type="FULLY_SPECIFIED" locale_preferred="1" changed_by="1"/>
+
+  <concept_description concept_description_id="7000200" concept_id="5000050" description="Whether the patient can write or not." locale="en" creator="1" date_created="2010-08-25 13:55:31" changed_by="1" uuid="8cd8b437-2df6-4563-b26e-7919cca35904"/>
+
+  <concept_answer concept_answer_id="7000200" concept_id="5000050" answer_concept="1065" creator="1" date_created="2012-06-24 16:38:02" uuid="40b0b94b-1f38-4df4-baf1-a60f5541efe6" sort_weight="3861"/>
+  <concept_answer concept_answer_id="7000201" concept_id="5000050" answer_concept="1066" creator="1" date_created="2012-06-24 16:38:02" uuid="6aa9d50f-7337-4662-a3f5-1f839c8642ef" sort_weight="3862"/>
+  <concept_answer concept_answer_id="7000202" concept_id="5000050" answer_concept="1067" creator="1" date_created="2012-06-24 16:38:02" uuid="7d3c1bcc-4aaf-4673-bed1-e006a5557a55" sort_weight="3863"/>
 </dataset>
