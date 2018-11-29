@@ -26,8 +26,8 @@ form ul.select,
 .form ul.select,
 input[type="search"] {
     background: #fff;
-    border: 1px solid rgba(62, 155, 138, 0.5);
-    border-bottom: 2px solid rgba(62, 155, 138, 0.7);
+    border: 1px solid rgba(155,155,155, 0.5);
+    border-bottom: 2px solid rgba(200, 200, 200, 0.7);
     border-radius:4px;
     box-shadow: inset rgba(0,0,0,0.3) 0 0 2px;
     box-sizing: border-box;
@@ -95,6 +95,8 @@ form input[type="checkbox"]:checked:after,
 .form input[type="checkbox"]:checked:after {
     font-size: 24px;
     color: #fff;
+    top: 1px;
+    left: 5px;
 }
 
 form input:focus,
@@ -312,14 +314,16 @@ input#retrospectiveVisitStartDate-field {
 
 /* TWEAKS TO STAGING */
 
-form input[type="checkbox"],
+form input[type="checkbox"], 
 .form input[type="checkbox"] {
-    padding: 12px;
+    padding: 16px;
     border: 1px solid #ccc;
     box-shadow: inset rgba(0,0,0,0.1) 0 0 4px;
     background: #fff;
-    margin: 0;
-    margin-right: 8px;
+    margin: 4px 8px 0 0;
+    height: 32px;
+    width: 32px;
+    box-sizing: border-box;
 }
 
 .section form label,

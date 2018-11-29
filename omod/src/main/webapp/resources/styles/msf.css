@@ -232,7 +232,6 @@ a.visited {
 .flex-row {
     margin: 24px 0;
     align-items: stretch;
-    justify-content: space-between;
     flex-direction: row !important;
     flex-wrap: nowrap;
     overflow: hidden;
@@ -244,6 +243,10 @@ a.visited {
 
 .flex-row > .flex-col {
     margin-right: 24px;
+}
+
+.flex-space-btwn {
+    justify-content: space-between;
 }
 
 .disabled {
@@ -259,6 +262,10 @@ a.visited {
 }
 
 /* Spacers */
+
+.margin-0 {
+    margin:0;
+}
 
 .margin-t-0 {
     margin-top: 0;
@@ -293,17 +300,23 @@ a.visited {
     margin-bottom: 1rem;
 }
 
-.pad-y-16 {
-    padding:1rem;
+.pad-16 {
+    padding:16px;
 }
-
-.pad-x-24 {
-    padding-left:1.5rem;
-    padding-right:1.5rem;
+.pad-b-16 {
+    padding-bottom:1rem;
+}
+.pad-y-16 {
+    padding-top:1rem;
+    padding-bottom:1rem;
 }
 
 .pad-t-24 {
     padding-top:1.5rem;
+}
+.pad-x-24 {
+    padding-left:1.5rem;
+    padding-right:1.5rem;
 }
 
 /* TOASTS */
@@ -832,7 +845,7 @@ span#start-time {
 
 /* style CANCELLED & PENDING here */
 .column-status {
-	background-color: #acacac;
+	color: #F0A202;
 }
 
 .icon-edit, .icon-ok, .icon-trash, .page, .actionable {
@@ -843,26 +856,11 @@ span#start-time {
 
 div#results-data table {
     box-shadow: none;
-    border: 2px solid #3E9C8B;
 }
 
-div[id*="filter-"],
-div#filter-status {
-    background: #A2E8DB;
+div#results-data table td {
     padding: 16px;
-    margin:0;
 }
-/*
-div#filter-name {
-    background: #55D6BE;
-    color:#fff;
-}
-div#filter-status {
-    background: #83E1CF;
-}
-div#filter-date {
-    background: #A2E8DB;
-}*/
 
 .current-page {
 	background-color: #acacac;

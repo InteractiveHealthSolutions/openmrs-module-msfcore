@@ -344,8 +344,6 @@ td.cv-risk-options input[type="radio"] + label{
 .section button.addEntry {
   margin: 0 auto;
   display: block;
-  padding: 18px 30px;
-  border-radius: 30px;
   margin-top:32px;
 }
 .section .obs-field {

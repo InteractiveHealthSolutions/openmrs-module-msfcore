@@ -12,24 +12,24 @@
 
 <div class="content-box flex-col">
 
-	<div id="results-header" class="print-ignore margin-b-16">
+	<div id="results-header" class="print-ignore margin-b-16 flex-row flex-space-btwn">
 		<h3 class="pull-left">${pageLabel}</h3>
 		<input type="button" class="pull-right" id="print-results" value="${ui.message('msfcore.printResults')}"/>
 	</div>
 
 	<div ng-app="resultsApp" ng-controller="ResultsController" ng-init="retrieveResults(true)">
 
-		<div class="flex-row margin-y-0 bg-teal-light print-ignore" ng-if="results.filters">
+		<div class="flex-row flex-space-btwn margin-y-0 pad-b-16 bg-teal-light print-ignore" ng-if="results.filters">
 
-			<div id="filter-name" ng-if="results.filters.name" class="flex-row">
+			<div id="filter-name" ng-if="results.filters.name" class="flex-row pad-16 margin-0">
 				<span class="flex-col margin-r-8">
 					<label>{{results.filters.name}} ${ui.message('general.search')}</label>
 					<input id="filter-name"/>
 				</span>
 				<button class="margin-t-20 margin-b-0" ng-click="nameFilter()">${ui.message('general.search')}</button>
 			</div>
-
-			<div id="filter-status" ng-if="results.filters.statuses" class="flex-col">
+ 
+			<div id="filter-status" ng-if="results.filters.statuses" class="flex-col pad-16 margin-0">
 				<label>${ui.message('msfcore.statusFilter')}</label>
 				<select ng-model="filterStatusValue" id="filter-status" ng-change="statusFilter()">
 					<option value="all" ng-if="results.resultCategory == 'LAB_RESULTS'">${ui.message('msfcore.statusAll')}</option>
@@ -38,7 +38,7 @@
 				</select>
 			</div>
 
-			<div ng-if="results.filters.providers" class="flex-col">
+			<div ng-if="results.filters.providers" class="flex-col pad-16 margin-0">
 				<label>${ui.message('msfcore.providerFilter')}</label>
 				<select ng-model="filterProviderValue" id="filter-provider" ng-change="providerFilter()">
 					<option value="all">${ui.message('msfcore.providerAll')}</option>
@@ -46,7 +46,7 @@
 				</select>
 			</div>
 
-			<div id="filter-date" ng-if="results.filters.dates" class="flex-row">
+			<div id="filter-date" ng-if="results.filters.dates" class="flex-row pad-16 margin-0">
 				<div class="flex-col margin-r-8">
 					<label>${ui.message('msfcore.dateFilter')}</label>
 					<select id="filter-dates" ng-model="filterDateValue" ng-change="datesFilter()"">
@@ -79,8 +79,12 @@
 							<ng-bind-html ng-bind-html="renderResultValue(result, key)"></ng-bind-html>
 						</td>
 						<td ng-if="result.actions.value.length > 0" class="print-ignore">
-							<span ng-if="result.actions.value.includes('EDIT') > 0"><i class="icon-edit" ng-click="edit(\$event, result);"></i></span>
-							<span ng-if="result.actions.value.includes('DELETE') > 0"><i class="icon-trash" ng-click="purge(result);"></i></span>
+							<span class="button-small" ng-if="result.actions.value.includes('EDIT') > 0" ng-click="edit(\$event, result);">
+								<i class="icon-edit"></i> Edit
+							</span>
+							<span class="button-small" ng-if="result.actions.value.includes('DELETE') > 0" ng-click="purge(result);">
+								<i class="icon-trash"></i> Delete
+							</span>
 						</td>
 						<td ng-if="!result.actions.value || result.actions.value.length == 0" class="print-ignore"></td>
 				</tbody>

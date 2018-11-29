@@ -39,7 +39,7 @@ a.button.task:visited,
     color: #373F46;
     font-family: 'OpenSansSemiBold', Arial, sans-serif;
     height: 44px;
-    padding: 12px 24px;
+    padding: 12px 16px;
     margin: 8px;
     text-align: center;
 }
@@ -242,6 +242,7 @@ input[type="submit"]:disabled:hover {
     opacity: 1;
 }
 
+.button-small, .page, .actionable,
 #encountersList .encounter-details li:last-child > .details-action a,
 #deleteVisitLink, #editVisitDatesLink, #editVisitLink,
 .edit-info,
@@ -266,6 +267,13 @@ a.view-details {
     padding: 4px;
     text-align:center;
     text-decoration: none;
+}
+
+.button-small {
+    font-size: 0.75rem;
+}
+.button-small i {
+    font-size: 1rem;
 }
 
 #viewAllAppointmentTypes a,
@@ -298,7 +306,7 @@ Causes an issue on Manage Service Types
 .delete-item:first-of-type {
     margin-right: 0;
 }*/
-
+.button-small
 .view-action.icon-file-alt::after,
 #patient-search-clear-button::after,
 .icon-pencil.edit-action::after,
@@ -325,10 +333,14 @@ a#patient-search-register-patient {
 .view-action.icon-file-alt::after {
     content: 'View';
 }
+.icon-ok::after {
+    content: 'save';
+}
 
 .edit-action.icon-share-alt:after {
     content: 'Open';
 }
+
 .icon-pencil.edit-action::after,
 .delete-item.icon-pencil::after {
     content: 'Edit';
