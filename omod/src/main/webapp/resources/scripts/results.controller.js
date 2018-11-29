@@ -150,6 +150,11 @@ function ResultsController($scope, $sce) {
             retrieveResults(true, filterByDates);
         }
     }
+    
+    this.providerFilter = this.providerFilter || function() {
+        replacePaginationInURLToRetrieveAll($scope);
+        retrieveResults(true, filterByProvider);
+    }
 
     $scope.retrieveResults = retrieveResults;
     $scope.retrieveResultsInitialisePages = this.retrieveResultsInitialisePages;
@@ -161,6 +166,7 @@ function ResultsController($scope, $sce) {
     $scope.nameFilter = this.nameFilter;
     $scope.statusFilter = this.statusFilter;
     $scope.datesFilter = this.datesFilter;
+    $scope.providerFilter = this.providerFilter;
 }
 
 function replaceElementWithTextInput($scope, result, element) {
@@ -294,6 +300,7 @@ function removeItemAtIndex(items, index) {
 function clearFilterFields($scope, results) {
     jQuery("#filter-name").val("");
     jQuery("#filter-status").val("all");
+    jQuery("#filter-provider").val("all");
     jQuery("#filter-start-date").val("");
     jQuery("#filter-end-date").val("");
     if (results.filters.dates && results.filters.dates.length > 0) {
@@ -303,6 +310,7 @@ function clearFilterFields($scope, results) {
     $scope.filterStartDate = "";
     $scope.filterEndDate = "";
     $scope.filterStatusValue = "all";
+    $scope.filterProviderValue = "all";
 }
 
 function filterByDates(results, $scope) {
@@ -327,6 +335,21 @@ function filterByDates(results, $scope) {
     jQuery("#filter-end-date").val(endDate)
 }
 
+function filterByProvider(results, $scope) {
+	const provider = jQuery("#filter-provider").val();
+    if (provider != "all") {
+        jQuery.each(results.results, function(i, resultRow) {
+        	// uses msfcore.provider message index, update when keys arrangment changes
+            if (results.resultCategory == 'REFERRAL_LIST' && resultRow[results.keys[3]].value != provider) {
+                results.results = removeItemAtIndex(results.results, i);
+            }
+        });
+    }
+    applyFilterChanges(results);
+    clearFilterFields($scope, results);
+    jQuery("#filter-provider").val(status);
+}
+
 function removeResultsNonMatchedByDates(dateField, i, resultRow, results, startDate, endDate) {
     var dateString = convertToDatePickerDateFormat(new Date(parseInteger(resultRow[dateField].value)));
     var date = new Date(dateString);
@@ -341,6 +364,8 @@ function logViewResultsEvent(results) {
         event = "VIEW_LAB_RESULTS";
     } else if (results.resultCategory == "DRUG_LIST") {
         event = "VIEW_DRUG_DISPENSING";
+    } else if (results.resultCategory == "REFERRAL_LIST") {
+        event = "VIEW_PATIENT_REFERRALS";
     }
     if (event) {
         var data = {
@@ -361,6 +386,8 @@ function resultPendingWhenEditable(result, key, category) {
     if (category == "LAB_RESULTS") {
         pendingWhenEditable = pendingWhenEditable && result.status.value != 'COMPLETED';
     } else if (category == "DRUG_LIST") {
+        pendingWhenEditable = pendingWhenEditable && (result.status.value == 'PENDING' || result.status.value == 'CANCELLED');
+    } else if (category == "REFERRAL_LIST") {
         pendingWhenEditable = pendingWhenEditable && (result.status.value == 'PENDING' || result.status.value == 'CANCELLED');
     }
     return pendingWhenEditable;

@@ -141,6 +141,7 @@ div#active-visits_filter.dataTables_filter {
     border-radius: 8px;
     box-shadow: rgba(0,0,0,0.1) 0 -2px 8px;
     box-sizing: border-box;
+    color: #fff;
     margin-bottom: -8px;
     padding: 16px 16px 24px 16px;
     width: 100%;
@@ -227,10 +228,16 @@ ul#formBreadcrumb li:last-child {
     border: none;
 }
 
+a.date-range-picker-clear-link.add-on:hover,
 i.icon-remove.add-on:hover {
     background: #ff4747;
     color: #fff;
     cursor: pointer;
+    text-decoration: none;
+}
+
+a.date-range-picker-clear-link.add-on:hover {
+    border-bottom: 2px solid #ff4747;
 }
 
 .selectmultipleInput {
@@ -248,14 +255,27 @@ i.icon-remove.add-on:hover {
     left:-6px !important;
 }
 
+span[id*="startDate"] span.add-on, 
+span[id*="stopDate"] span.add-on {
+    left: 0px !important;
+    top: 1px;
+}
 
 a.date-range-picker-clear-link.add-on {
-    margin-left: -5px;
-    padding: 10px 8px;
-    top: -2px;
-    background: #fff;
-    color: red;
+    margin-left: -6px;
+    padding: 9px 8px;
+    top: -3px;
+    color: #fff;
+    font-family: 'OpenSansSemiBold';
+    border-left: 1px solid #4EC3AD;
 }
+
+
+.date-range-picker-div .angular-datepicker .icon-calendar, 
+a.date-range-picker-clear-link.add-on {
+    left: -77px !important;
+}
+
 
 input#retrospectiveVisitStartDate-display,
 input#retrospectiveVisitStartDate-field {

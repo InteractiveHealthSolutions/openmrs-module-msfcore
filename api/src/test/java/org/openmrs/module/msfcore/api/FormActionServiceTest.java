@@ -197,4 +197,29 @@ public class FormActionServiceTest extends BaseModuleContextSensitiveTest {
         formActionService.saveAllergies(encounter);
     }
 
+    @Test
+    public void saveReferrals_shouldCreateReferrals() throws Exception {
+        executeDataSet("FormActionService.xml");
+        Encounter encounter = Context.getEncounterService().getEncounter(39);
+        formActionService.saveReferralOrders(encounter);
+        encounter = Context.getEncounterService().getEncounter(39);
+        List<Obs> observationsWithOrders = encounter.getAllObs(false).stream().filter(o -> o.getOrder() != null)
+                        .collect(Collectors.toList());
+        Assert.assertEquals(2, observationsWithOrders.size());
+        Assert.assertEquals(2, encounter.getOrders().size());
+        Assert.assertTrue(observationsWithOrders.stream().filter(o -> o.getConcept().getConceptId().intValue() == 463402).findAny()
+                        .isPresent());
+        Assert.assertTrue(observationsWithOrders.stream().filter(o -> o.getConcept().getConceptId().intValue() == 463405).findAny()
+                        .isPresent());
+        Assert.assertEquals(2,
+                        encounter.getOrders().stream().filter(order -> "Comments for all referrals".equals(order.getOrderReasonNonCoded()))
+                                        .collect(Collectors.toList()).size());
+    }
+    @Test
+    public void saveReferrals_shouldVoidOrder() throws Exception {
+        executeDataSet("FormActionService.xml");
+        Encounter encounter = Context.getEncounterService().getEncounter(40);
+        formActionService.saveReferralOrders(encounter);
+        Assert.assertTrue(Context.getOrderService().getOrder(12).getVoided());
+    }
 }

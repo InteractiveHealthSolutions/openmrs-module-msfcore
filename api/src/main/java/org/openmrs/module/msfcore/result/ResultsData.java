@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.openmrs.Concept;
 import org.openmrs.ConceptDatatype;
@@ -60,7 +61,8 @@ public class ResultsData {
 
     public void addRetrievedResults() {
         dateFormatPattern = Context.getDateFormat().toPattern();
-        if (resultCategory.equals(ResultCategory.DRUG_LIST) || resultCategory.equals(ResultCategory.LAB_RESULTS)) {
+        if (resultCategory.equals(ResultCategory.DRUG_LIST) || resultCategory.equals(ResultCategory.LAB_RESULTS)
+                        || resultCategory.equals(ResultCategory.REFERRAL_LIST)) {
             addOrders();
         }
     }
@@ -87,14 +89,21 @@ public class ResultsData {
             filters.setDates(getLocalizedKeys(Arrays.asList("msfcore.orderDate", "msfcore.resultDate")));
             filters.setName(Context.getMessageSourceService().getMessage("msfcore.testName"));
             keys.addAll(getLabResultKeys());
+        } else if (resultCategory.equals(ResultCategory.REFERRAL_LIST)) {
+            orderType = Context.getOrderService().getOrderTypeByUuid(MSFCoreConfig.REFERRAL_ORDER_TYPE_UUID);
+            filters.setName(Context.getMessageSourceService().getMessage("msfcore.location"));
+            filters.setStatuses(Arrays.asList(ResultStatus.CANCELLED, ResultStatus.PENDING, ResultStatus.COMPLETED));
+            filters.setProviders(getAllProviders());
+            keys.addAll(getReferralListKeys());
         }
         List<Order> orders = Context.getService(MSFCoreService.class).getOrders(patient, orderType, null, pagination);
         for (Order o : orders) {
-            if (resultCategory.equals(ResultCategory.DRUG_LIST) && o instanceof DrugOrder) {
+            if (resultCategory.equals(ResultCategory.DRUG_LIST) && o.getOrderType().equals(orderType) && o instanceof DrugOrder) {
                 addDrugOrders(o);
-            }
-            if (resultCategory.equals(ResultCategory.LAB_RESULTS) && o instanceof TestOrder) {
+            } else if (resultCategory.equals(ResultCategory.LAB_RESULTS) && o.getOrderType().equals(orderType) && o instanceof TestOrder) {
                 addTestOrders(o);
+            } else if (resultCategory.equals(ResultCategory.REFERRAL_LIST) && o.getOrderType().equals(orderType)) {
+                addReferralOrders(o);
             }
         }
     }
@@ -110,6 +119,11 @@ public class ResultsData {
                         "msfcore.resultDate"));
     }
 
+    private static List<String> getReferralListKeys() {
+        return getLocalizedKeys(Arrays.asList("msfcore.location", "msfcore.date", "msfcore.reason", "msfcore.provider", "msfcore.feedback",
+                        "msfcore.feedbackFrom"));
+    }
+
     private void addTestOrders(Order o) {
         ResultRow resultRow = new ResultRow();
         TestOrder testOrder = (TestOrder) o;
@@ -118,7 +132,7 @@ public class ResultsData {
             // TODO fix for other investigation order
             Obs resultObs = getResultObs(testOrder, concept);
             resultRow.put("uuid", ResultColumn.builder().value(testOrder.getUuid()).build());
-            Object status = null;
+            ResultStatus status = null;
             List<ResultAction> actions = new ArrayList<ResultAction>();
             if (testOrder.getVoided()) {
                 status = ResultStatus.CANCELLED;
@@ -168,7 +182,7 @@ public class ResultsData {
                         MSFCoreConfig.CONCEPT_UUID_DESPENSED_DATE));
         Obs dispensedDetailsObs = getResultObs(drugOrder, Context.getConceptService().getConceptByUuid(
                         MSFCoreConfig.CONCEPT_UUID_DESPENSED_DETAILS));
-        Object status = null;
+        ResultStatus status = null;
         List<ResultAction> actions = new ArrayList<ResultAction>();
         boolean isDiscontinued = drugOrder.isDiscontinuedRightNow();
         if (drugOrder.getVoided()) {
@@ -213,6 +227,46 @@ public class ResultsData {
         addResultRow(resultRow);
     }
 
+    private void addReferralOrders(Order order) {
+        ResultRow resultRow = new ResultRow();
+        ResultStatus status = null;
+        Obs feedback = getResultObs(order, Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_FEEDBACK));
+        Obs feedbackFrom = getResultObs(order, Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_FEEDBACK_FROM));
+
+        List<ResultAction> actions = new ArrayList<ResultAction>();
+        if (order.getVoided()) {
+            status = ResultStatus.CANCELLED;
+        } else if (feedback == null || feedbackFrom == null) {
+            status = ResultStatus.PENDING;
+            actions.add(ResultAction.EDIT);
+            actions.add(ResultAction.DELETE);
+        } else {
+            status = ResultStatus.COMPLETED;
+            actions.add(ResultAction.EDIT);
+        }
+        resultRow.put("uuid", ResultColumn.builder().value(order.getUuid()).build());
+        resultRow.put("status", ResultColumn.builder().value(status).build());
+        resultRow.put("actions", ResultColumn.builder().value(actions).build());
+        resultRow.put(Context.getMessageSourceService().getMessage("msfcore.location"), ResultColumn.builder().value(
+                        order.getConcept().getName().getName()).build());
+        resultRow.put(Context.getMessageSourceService().getMessage("msfcore.date"), ResultColumn.builder().value(order.getDateActivated())
+                        .type(Type.DATE).build());
+        resultRow.put(Context.getMessageSourceService().getMessage("msfcore.reason"), ResultColumn.builder().value(
+                        order.getOrderReasonNonCoded()).build());
+        resultRow.put(Context.getMessageSourceService().getMessage("msfcore.provider"), ResultColumn.builder().value(
+                        order.getOrderer() != null ? order.getOrderer().getName() : "").build());
+        resultRow.put(Context.getMessageSourceService().getMessage("msfcore.feedback"), ResultColumn.builder().editable(true).value(
+                        feedback != null ? feedback.getValueText() : "").build());
+        Provider provider = feedbackFrom != null ? Context.getProviderService().getProviderByUuid(feedbackFrom.getValueText()) : null;
+        resultRow.put(Context.getMessageSourceService().getMessage("msfcore.feedbackFrom"), ResultColumn.builder().editable(true).type(
+                        Type.CODED).value(provider != null ? provider.getName() : "").codedOptions(getAllProviders()).build());
+        addResultRow(resultRow);
+    }
+
+    private List<CodedOption> getAllProviders() {
+        return Context.getProviderService().getAllProviders(false).stream()
+                        .map(p -> CodedOption.builder().name(p.getName()).uuid(p.getUuid()).build()).collect(Collectors.toList());
+    }
     private List<CodedOption> getCodedOptionsFromConceptSet(Concept dispensedConcept) {
         List<CodedOption> options = new ArrayList<CodedOption>();
         if (dispensedConcept.getSet()) {
@@ -296,6 +350,8 @@ public class ResultsData {
             type = Context.getEncounterService().getEncounterTypeByUuid(MSFCoreConfig.ENCOUNTER_TYPE_LAB_RESULTS_UUID);
         } else if (category.equals(ResultCategory.DRUG_LIST)) {
             type = Context.getEncounterService().getEncounterTypeByUuid(MSFCoreConfig.ENCOUNTER_TYPE_DISPENSE_DRUG_UUID);
+        } else if (category.equals(ResultCategory.REFERRAL_LIST)) {
+            type = Context.getEncounterService().getEncounterTypeByUuid(MSFCoreConfig.ENCOUNTER_TYPE_REFER_PATIENT_UUID);
         }
         enc.setEncounterType(type);// suport other enounterTypes if needed
         enc.setEncounterDatetime(new Date());
@@ -309,6 +365,8 @@ public class ResultsData {
                 return updateLabResultRow(propertiesToCreate);
             } else if (parseCategory((String) propertiesToCreate.get("category")).equals(ResultCategory.DRUG_LIST)) {
                 return updateDrugOrderRow(propertiesToCreate);
+            } else if (parseCategory((String) propertiesToCreate.get("category")).equals(ResultCategory.REFERRAL_LIST)) {
+                return updateReferralOrderRow(propertiesToCreate);
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -405,6 +463,34 @@ public class ResultsData {
             AuditLogBuilder labResultEventBuilder = buildAuditLog(obs, Event.ADD_DRUG_DISPENSING, Event.EDIT_DRUG_DISPENSING);
             obs = Context.getObsService().saveObs(obs, changeReason);
             Context.getService(AuditService.class).saveAuditLog(labResultEventBuilder.build());
+            obsList.add(obs);
+        }
+        return obsList;
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static List<Obs> updateReferralOrderRow(LinkedHashMap<String, Object> propertiesToCreate) throws ParseException {
+        List<Obs> obsList = new ArrayList<Obs>();
+        String changeReason = "Updating referral order obs from results widget";
+        for (Map resultColumnEntry : (ArrayList<Map>) propertiesToCreate.get("payload")) {
+            String[] idContent = ((String) resultColumnEntry.get("uuid_key_type_concept")).split("_");
+            String value = (String) resultColumnEntry.get("value");
+            String key = getReferralListKeys().get(Integer.parseInt(idContent[1]));
+            Obs obs = null;
+            Order order = Context.getOrderService().getOrderByUuid(idContent[0]);
+            if (key.equals(Context.getMessageSourceService().getMessage("msfcore.feedback"))) {
+                obs = retrieveOrCreateObs(obs, order, Context.getConceptService().getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_FEEDBACK),
+                                ResultCategory.REFERRAL_LIST);
+                obs.setValueText(value);
+            } else if (key.equals(Context.getMessageSourceService().getMessage("msfcore.feedbackFrom"))) {
+                obs = retrieveOrCreateObs(obs, order, Context.getConceptService()
+                                .getConceptByUuid(MSFCoreConfig.CONCEPT_UUID_FEEDBACK_FROM), ResultCategory.REFERRAL_LIST);
+                obs.setValueText(value);// provider uuid
+            }
+            obs.setObsDatetime(new Date());
+            AuditLogBuilder resultEventBuilder = buildAuditLog(obs, Event.ADD_REFERRAL, Event.EDIT_REFERRAL);
+            obs = Context.getObsService().saveObs(obs, changeReason);
+            Context.getService(AuditService.class).saveAuditLog(resultEventBuilder.build());
             obsList.add(obs);
         }
         return obsList;
