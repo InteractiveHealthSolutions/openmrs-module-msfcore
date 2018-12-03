@@ -18,7 +18,7 @@
         <link href="${ui.resourceLink('msfcore', 'styles/msf.css')}" rel="stylesheet" type="text/css" media="all">
     <!-- /MSF: We may override the header or else just style it here -->
 </head>
-<body>
+<body id="login">
 <script type="text/javascript">
     var OPENMRS_CONTEXT_PATH = '${ ui.contextPath() }';
 </script>
@@ -69,9 +69,7 @@
 
 <header>
     <div class="logo">
-        <a href="${ui.pageLink("referenceapplication", "home")}">
-            <img src="${ui.resourceLink("msfcore", "images/msf_logo.png")}"/>
-        </a>
+        <img src="${ui.resourceLink("msfcore", "images/msf_logo.png")}"/>
     </div>
 </header>
 

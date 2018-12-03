@@ -57,6 +57,16 @@
 .patient-header .identifiers span {
     background: #757C83;
 }
+.patient-header .identifiers span#info_patient_detail {
+    background: none;
+}
+.patient-header .identifiers span#info_patient_detail small {
+    font-size:1rem;
+    color:#4EC3AD;
+}
+.patient-header .identifiers span#info_patient_detail small:hover {
+    text-decoration: underline;
+}
 
 .secondLineFragments {
     display:none;

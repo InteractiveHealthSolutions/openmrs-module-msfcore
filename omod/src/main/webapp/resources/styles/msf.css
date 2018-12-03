@@ -64,7 +64,7 @@ body {
 }
 
 header {
-    background-color: #ffff;
+    background-color: #fff;
     box-shadow: rgba(0, 0, 0, .3) 0 0 16px;
     width: 100%;
     border-radius: 0;
@@ -77,6 +77,29 @@ header {
 
 header .logo {
     margin: 4px 0 4px 16px;
+}
+
+#login header {
+    background-color: transparent;
+    box-shadow: none;
+    border-top: none;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+}
+
+#login header .logo {
+    margin: 24px 0;
+}
+
+#login header .logo img {
+    min-width:160px;
+}
+
+#login #content {
+    display: flex;
+    justify-content: center;
 }
 
 #body-wrapper {
@@ -255,6 +278,10 @@ a.visited {
     margin-right: 24px;
 }
 
+.flex-grow-1 {
+    flex-grow:1;
+}
+
 .flex-space-btwn {
     justify-content: space-between;
 }
@@ -285,7 +312,7 @@ a.visited {
     margin-top: 0;
 }
 .margin-t-16 {
-    margin-top: 1rem;
+    margin-top: 1rem !important;
 }
 .margin-t-32 {
     margin-top: 2rem;
@@ -890,4 +917,17 @@ div#results-data table td {
 
 td.no-wrap {
 	white-space: nowrap;
+}
+
+#patient_details {
+    display: block;
+    margin-top: 0;
+    float: left;
+    padding: 16px 24px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 -16px -16px;
+}
+
+ul.flex-col li {
+    padding: 4px;
 }

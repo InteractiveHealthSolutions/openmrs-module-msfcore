@@ -360,15 +360,15 @@ form input[type=radio] + label,
 }
 
 form#login-form {
-    width: 34%;
-    margin: 9rem auto;
+    max-width: 34%;
+    min-width: 360px;
     background: #fff;
     border-radius: 8px;
     box-shadow: rgba(0,0,0,0.3) 0 8px 16px;
 }
 
 ul.select li {
-    width: 40%;
+    width: calc( 50% - 34px );
     padding: 8px;
     color: #4EC3AD;
     border-radius: 4px;
