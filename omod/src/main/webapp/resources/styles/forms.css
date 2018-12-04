@@ -345,14 +345,16 @@ form label,
 .form label {
     display: block;
     text-align: left;
-    margin-bottom: 4px;
-    margin-top: 0px;
 }
 
 form input[type=radio] + label,
 .form input[type=radio] + label {
     margin: 0 4px 0 4px;
     float: left;
+}
+
+form.flex-col > .input-group {
+    max-width: 360px;
 }
 
 .input-group input[type=radio] + label {

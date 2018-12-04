@@ -159,13 +159,6 @@ table#active-visits + input + input + div,
     box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px;
 }
 
-/* All four rounded corners */
-div[ng-app="changeLanguage"],
-#adminui-changePassword,
-#appointment-block-form,
-.create-appointment-type {
-    border-radius: 8px;
-}
 
 /* Bottom Rounded Corners for these boxes */
 
@@ -182,6 +175,15 @@ table#active-visits + input + input + div,
 
 .top-rounded {
     border-radius: 8px 8px 0 0;
+}
+
+/* All four rounded corners */
+.all-rounded,
+div[ng-app="changeLanguage"],
+#adminui-changePassword,
+#appointment-block-form,
+.create-appointment-type {
+    border-radius: 8px;
 }
 
 div#simplemodal-container {
