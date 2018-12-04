@@ -279,6 +279,31 @@
                   "cssClasses":[
 
                   ]
+                },{
+                  "type":"personAttribute",
+                  "label":"msfcore.education.abletoread",
+                  "uuid":"ebb49035-b40b-4659-a1c6-0cb3ceade639",
+                  "formFieldName":"abletoread",
+                  "widget":{
+                    "providerName":"msfcore",
+                    "fragmentId":"field/ableToRead"
+                  },
+                  "cssClasses":[
+
+                  ]
+                },
+                {
+                  "type":"personAttribute",
+                  "label":"msfcore.education.abletowrite",
+                  "uuid":"ccf9a5cf-c6ff-456c-b8f3-3cf3f02b4150",
+                  "formFieldName":"abletowrite",
+                  "widget":{
+                    "providerName":"msfcore",
+                    "fragmentId":"field/ableToWrite"
+                  },
+                  "cssClasses":[
+
+                  ]
                 }
               ]
             }

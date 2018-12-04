@@ -502,4 +502,66 @@ public class PersonAttributeTypes {
             return true;
         }
     };
+
+    public static PersonAttributeTypeDescriptor MSF_EDUCATION_ABLE_TO_READ = new PersonAttributeTypeDescriptor() {
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+
+        @Override
+        public Class<?> format() {
+            return Boolean.class;
+        }
+
+        @Override
+        public String name() {
+            return "Able to read";
+        }
+
+        @Override
+        public String description() {
+            return "Whether the person can read";
+        }
+
+        public String uuid() {
+            return MSFCoreConfig.PERSON_ATTRIBUTE_ABLE_TO_READ_UUID;
+        }
+
+        @Override
+        public boolean searchable() {
+            return false;
+        }
+    };
+
+    public static PersonAttributeTypeDescriptor MSF_EDUCATION_ABLE_TO_WRITE = new PersonAttributeTypeDescriptor() {
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+
+        @Override
+        public Class<?> format() {
+            return Boolean.class;
+        }
+
+        @Override
+        public String name() {
+            return "Able to write";
+        }
+
+        @Override
+        public String description() {
+            return "Whether the person can write";
+        }
+
+        public String uuid() {
+            return MSFCoreConfig.PERSON_ATTRIBUTE_ABLE_TO_WRITE_UUID;
+        }
+
+        @Override
+        public boolean searchable() {
+            return false;
+        }
+    };
 }

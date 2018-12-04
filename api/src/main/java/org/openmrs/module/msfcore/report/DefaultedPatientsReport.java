@@ -10,6 +10,7 @@ import org.openmrs.module.reporting.evaluation.parameter.Parameter;
 import org.openmrs.module.reporting.report.ReportDesign;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.manager.ReportManagerUtil;
+import org.openmrs.module.reporting.report.util.ReportUtil;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,21 +18,25 @@ import org.springframework.stereotype.Component;
  * MSFCoreActivator
  */
 @Component
-public class MorbidityAnalysisReport extends BaseMSFReportManager {
+public class DefaultedPatientsReport extends BaseMSFReportManager {
 
     @Override
     public String getName() {
-        return Context.getMessageSourceService().getMessage("msfcore.reports.morbilityAnalysis");
+        return Context.getMessageSourceService().getMessage("msfcore.reports.defaultedPatients");
+    }
+
+    public String getDatasetName(ReportDefinition definition) {
+        return definition.getName().toLowerCase().replace(" ", "_");
     }
 
     @Override
     public String getUuid() {
-        return ReportConstants.MORBIDITY_ANALYSIS_REPORT_UUID;
+        return ReportConstants.DEFAULTED_PATIENTS_REPORT_UUID;
     }
 
     @Override
     public String getDescription() {
-        return Context.getMessageSourceService().getMessage("msfcore.reports.morbilityAnalysis.description");
+        return Context.getMessageSourceService().getMessage("msfcore.reports.defaultedPatients.description");
     }
 
     @Override
@@ -44,6 +49,7 @@ public class MorbidityAnalysisReport extends BaseMSFReportManager {
         List<Parameter> parameterArrayList = new ArrayList<Parameter>();
         parameterArrayList.add(ReportConstants.START_DATE_PARAMETER);
         parameterArrayList.add(ReportConstants.END_DATE_PARAMETER);
+        parameterArrayList.add(ReportConstants.LOCATION_PARAMETER);
         return parameterArrayList;
     }
 
@@ -57,38 +63,27 @@ public class MorbidityAnalysisReport extends BaseMSFReportManager {
 
         // Using sql is the easiest way here
         SqlDataSetDefinition sqlDataDef = new SqlDataSetDefinition();
-        sqlDataDef.setUuid("3572eafc-c8ae-11e8-a8d5-f2801f1b9fd1");
-        sqlDataDef.setName(getName());
+        sqlDataDef.setUuid("304f741c-60a2-4a44-bf3b-89cd1308f10a");
+        sqlDataDef.setName(getDatasetName(reportDef));
         sqlDataDef.addParameters(getParameters());
-        sqlDataDef.setSqlQuery(getDiagnosisByGenderSQLQuery());
-        reportDef.addDataSetDefinition("diagnosesByGender", Mapped.mapStraightThrough(sqlDataDef));
+        sqlDataDef.setSqlQuery(getReportSQLQuery());
+        reportDef.addDataSetDefinition(sqlDataDef.getName(), Mapped.mapStraightThrough(sqlDataDef));
         return reportDef;
     }
 
     @Override
     public List<ReportDesign> constructReportDesigns(ReportDefinition reportDefinition) {
         List<ReportDesign> l = new ArrayList<ReportDesign>();
-        ReportDesign design = ReportManagerUtil.createExcelDesign("3572ec50-c8ae-11e8-a8d5-f2801f1b9fd1", reportDefinition);
-        design.setName(getName() + " Excel Design");
+        ReportDesign design = ReportManagerUtil.createExcelTemplateDesign("618a3b96-4879-4234-8967-5dac6b2b3e83", reportDefinition,
+                        "excel_template_defaulters.xls");
+        design.addPropertyValue("repeatingSections", "sheet:1,row:6,dataset:" + getDatasetName(reportDefinition));
+        design.setName("excel_template_defaulters");
         l.add(design);
         return l;
     }
 
-    private String getDiagnosisByGenderSQLQuery() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT COALESCE(d.diagnosis_non_coded, max(cn.name)) as Diagnosis, ");
-        stringBuilder.append("COUNT(DISTINCT(CASE WHEN p.gender = 'M' THEN p.person_id END)) AS Male, ");
-        stringBuilder.append("COUNT(DISTINCT(CASE WHEN p.gender = 'F' THEN p.person_id END)) AS Female, ");
-        stringBuilder.append("COUNT(DISTINCT p.person_id) as Total FROM encounter_diagnosis d ");
-        stringBuilder.append("LEFT JOIN concept_name cn ON cn.concept_id = d.diagnosis_coded ");
-        stringBuilder.append("INNER JOIN person p ON d.patient_id = p.person_id ");
-        stringBuilder.append("WHERE COALESCE(cn.locale, '') in ('en' ,'') ");
-        stringBuilder.append("AND COALESCE(cn.locale_preferred, '') in ('1', '') ");
-        stringBuilder.append("AND d.date_created >= :startDate ");
-        stringBuilder.append("AND d.date_created <= :endDate ");
-        stringBuilder.append("group by COALESCE(d.diagnosis_non_coded, d.diagnosis_coded), COALESCE(d.diagnosis_non_coded, cn.name) ");
-        stringBuilder.append("order by Total desc;");
-        return stringBuilder.toString();
+    private String getReportSQLQuery() {
+        return ReportUtil.readStringFromResource("query_defaulters.sql");
     }
 
 }
