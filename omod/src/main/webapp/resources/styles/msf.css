@@ -920,7 +920,6 @@ td.no-wrap {
 }
 
 #patient_details {
-    display: block;
     margin-top: 0;
     float: left;
     padding: 16px 24px;
