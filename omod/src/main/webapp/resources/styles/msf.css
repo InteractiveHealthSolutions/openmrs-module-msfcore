@@ -43,6 +43,10 @@ White: FFFFFF
     border-bottom: 1px solid #eee;
 }
 
+.bdr-btm-blue{
+    border-bottom: 1px solid #D1DFE8;
+}
+
 /* STRUCTURE */
 
 html {
@@ -309,7 +313,7 @@ a.visited {
 }
 
 .margin-t-0 {
-    margin-top: 0;
+    margin-top: 0 !important;
 }
 .margin-t-16 {
     margin-top: 1rem !important;
@@ -350,9 +354,14 @@ a.visited {
 .pad-16 {
     padding:16px;
 }
+
 .pad-b-16 {
     padding-bottom:1rem;
 }
+.pad-b-24 {
+    padding-bottom:1.5rem;
+}
+
 .pad-y-16 {
     padding-top:1rem;
     padding-bottom:1rem;

@@ -112,6 +112,16 @@ form ul.select:focus,
     outline: none;
 }
 
+.input-group {
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.input-group.flex-col {
+    align-items: start;
+}
+
 .input-group textarea {
     width: 90%;
     margin: 24px;
@@ -316,7 +326,7 @@ input#retrospectiveVisitStartDate-field {
 
 form input[type="checkbox"], 
 .form input[type="checkbox"] {
-    padding: 16px;
+    padding: 15px;
     border: 1px solid #ccc;
     box-shadow: inset rgba(0,0,0,0.1) 0 0 4px;
     background: #fff;
