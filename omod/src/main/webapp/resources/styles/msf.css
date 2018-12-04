@@ -115,6 +115,8 @@ header .logo {
 
 /* Containers for forms and page elements */
 
+div[ng-app="changeLanguage"],
+#adminui-changePassword,
 .content-box,
 h2 + div#filters,
 htmlform[formname="Discharge (Simple)"],
@@ -136,6 +138,7 @@ table#active-visits + input + input + div,
 /* Standard Drop Shadow */
 /* Merge Visits */
 
+div[ng-app="changeLanguage"],
 .content-box,
 .drop-shadow-mid,
 h2 + div#filters,
@@ -151,11 +154,14 @@ table#active-visits + input + input + div,
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 8px;
 }
 
+#adminui-changePassword,
 .drop-shadow-close {
     box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px;
 }
 
 /* All four rounded corners */
+div[ng-app="changeLanguage"],
+#adminui-changePassword,
 #appointment-block-form,
 .create-appointment-type {
     border-radius: 8px;
