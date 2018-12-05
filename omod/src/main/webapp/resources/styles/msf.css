@@ -363,6 +363,14 @@ a.visited {
     padding:16px;
 }
 
+.pad-t-8 {  
+    padding-top:0.5rem;
+}
+
+.pad-t-24 {
+    padding-top:1.5rem;
+}
+
 .pad-b-16 {
     padding-bottom:1rem;
 }
@@ -375,9 +383,7 @@ a.visited {
     padding-bottom:1rem;
 }
 
-.pad-t-24 {
-    padding-top:1.5rem;
-}
+
 .pad-x-24 {
     padding-left:1.5rem;
     padding-right:1.5rem;

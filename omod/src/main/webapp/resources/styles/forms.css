@@ -52,8 +52,9 @@ select,
 .simple-form-ui select#gender-field {
    height: 100%;
 }
-form input {
-    margin-top: 0;
+
+form input, form select {
+    margin-top: 4px;
 }
 
 /* NCD LABELS
@@ -78,6 +79,10 @@ form input[type="radio"],
 form input[type="checkbox"],
 .form input[type="checkbox"] {
     padding: 6px;
+}
+
+form input[type="radio"] {
+    height: 16px;
 }
 
 form input[type="radio"]:checked {
