@@ -130,6 +130,10 @@ table#active-visits + input + input + div,
     padding: 24px;
     background: #fff;
 }
+/* Only White Background */
+#list-accounts_wrapper {
+    background:#fff;
+}
 
 .patient-header+#edit-patient-identifier-dialog+h3+#mark-patient-dead {
     margin-top: -10px;
@@ -144,6 +148,7 @@ div[ng-app="changeLanguage"],
 h2 + div#filters,
 htmlform[formname="Discharge (Simple)"],
 htmlform[formname="Admission (Simple)"],
+#list-accounts_wrapper
 #appointment-block-form,
 table#active-visits + input + input + div,
 .dashboard, table,
@@ -180,6 +185,7 @@ table#active-visits + input + input + div,
 /* All four rounded corners */
 .all-rounded,
 div[ng-app="changeLanguage"],
+#list-accounts_wrapper,
 #adminui-changePassword,
 #appointment-block-form,
 .create-appointment-type {
@@ -489,7 +495,6 @@ table tr:nth-child(even) {
     border-top: 8px solid #373F46;
     color: #fff;
     padding: 8px;
-    margin-bottom: 64px;
 }
 
 .dataTables_info {
@@ -956,4 +961,17 @@ td.no-wrap {
 
 ul.flex-col li {
     padding: 4px;
+}
+/* Manage Accounts */
+.dataTables_filter {
+    background: #A2E8DB;
+    border-radius: 8px 8px 0 0;
+    box-sizing: border-box;
+    padding:24px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.dataTables_wrapper {
+    min-height: 100px;
 }
