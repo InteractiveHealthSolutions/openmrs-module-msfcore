@@ -177,11 +177,11 @@ daterangepicker button {
 
 form#patient-search-form,
 div#active-visits_filter.dataTables_filter {
-    background: #424C55;
+    background: #A2E8DB;
     border-radius: 8px;
     box-shadow: rgba(0,0,0,0.1) 0 -2px 8px;
     box-sizing: border-box;
-    color: #fff;
+    color: #424C55;
     margin-bottom: -8px;
     padding: 16px 16px 24px 16px;
     width: 100%;
