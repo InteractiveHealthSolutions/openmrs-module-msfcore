@@ -932,6 +932,10 @@ div#results-data table td {
     padding: 16px;
 }
 
+div#results-data table tr th:nth-of-type(3) {
+    width:360px;
+}
+
 .current-page {
 	background-color: #acacac;
 }

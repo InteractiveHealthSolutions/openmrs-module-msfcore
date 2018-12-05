@@ -19,7 +19,7 @@
 
 	<div ng-app="resultsApp" ng-controller="ResultsController" ng-init="retrieveResults(true)">
 
-		<div class="flex-row flex-space-btwn margin-y-0 pad-b-16 bg-teal-light print-ignore" ng-if="results.filters">
+		<div class="flex-row margin-y-0 pad-b-16 bg-teal-light top-rounded drop-shadow-mid print-ignore" ng-if="results.filters">
 
 			<div id="filter-name" ng-if="results.filters.name" class="flex-row pad-16 margin-0">
 				<span class="flex-col margin-r-8">
@@ -65,7 +65,7 @@
 			</div>
 		</div>
 
-		<div id="results-data">
+		<div id="results-data" class="drop-shadow-mid">
 			<table>
 				<thead>
 					<tr>
@@ -91,7 +91,7 @@
 			</table>
 		</div>
 
-		<div class="print-ignore text-center pagination flex-row margin-y-0 bottom-rounded">
+		<div class="print-ignore text-center pagination flex-row margin-y-0 bottom-rounded drop-shadow-mid">
 			<div class="pad-x-24 pad-y-16">
 				<!--<button onclick="history.back();">${ ui.message('general.back')}"</button>-->
 				<span>${ui.message('msfcore.show')}</span>

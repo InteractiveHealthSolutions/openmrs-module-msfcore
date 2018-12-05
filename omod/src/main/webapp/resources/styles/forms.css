@@ -26,7 +26,7 @@ form ul.select,
 .form ul.select,
 input[type="search"] {
     background: #fff;
-    border: 1px solid rgba(155,155,155, 0.5);
+    border: 1px solid rgba(155,155,155, 0.75);
     border-bottom: 2px solid rgba(200, 200, 200, 0.7);
     border-radius:4px;
     box-shadow: inset rgba(0,0,0,0.3) 0 0 2px;
