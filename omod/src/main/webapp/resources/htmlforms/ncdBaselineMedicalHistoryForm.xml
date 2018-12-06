@@ -213,10 +213,11 @@
                         </tr>
                         </obsgroup>
                         
-                    	<h4><lookup expression="fn.message('msfcore.ncdbaseline.medicalhistory.otherfamilyhistory')"/>:</h4>
-						<obs conceptId="84a65ad0-f876-11e8-8eb2-f2801f1b9fd1" rows="4" cols="60"/>
-						
                     </table>
+                    
+                    <h4><lookup expression="fn.message('msfcore.ncdbaseline.medicalhistory.otherfamilyhistory')"/>:</h4>
+					<obs conceptId="84a65ad0-f876-11e8-8eb2-f2801f1b9fd1" rows="4" cols="60"/>
+						
                     <!-- Submit -->
 
                     <div class="bottom-of-form">
